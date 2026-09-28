@@ -367,6 +367,20 @@ mark{background:var(--yellow);border-radius:0;padding:0 2px;color:#000}
 @media (max-width:640px){.kv{grid-template-columns:1fr}.split{grid-template-columns:1fr}.split .vs{justify-self:center}}
 @media (max-width:760px){.btn-group{order:5}.brand small{display:none}}
 @media print{.top{position:static}.col-b{display:block!important}.btn,.search{display:none}.view{display:block!important}}
+/* keyboard layer over the map canvas */
+.graph-a11y{position:absolute;top:12px;left:12px;right:12px;bottom:12px;margin:0;padding:0;list-style:none;pointer-events:none}
+.graph-a11y li{display:contents}
+.graph-a11y button{position:absolute;transform:translate(-50%,-50%);border:0;padding:0;margin:0;background:transparent;border-radius:50%;pointer-events:none;color:transparent}
+.graph-a11y button:focus-visible{outline:3px solid #000;outline-offset:3px}
+/* role filter on the swimlanes */
+.role-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px}
+.role-bar .lbl{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase;margin-right:4px}
+.role-note{margin:0 0 12px;font-size:13px}
+.role-note:empty{display:none}
+.lanes .fn,.lanes .cell{transition:opacity .25s var(--ease),background .3s var(--ease),box-shadow .25s var(--ease)}
+.lanes.filtered .fn:not(.sel),.lanes.filtered .cell:not(.sel){opacity:.18}
+.lanes.filtered .cell.sel.l0,.lanes.filtered .cell.sel.l1{opacity:.6}
+.lanes.filtered .cell.sel.l3{box-shadow:inset 0 0 0 3px #000}
 </style>
 </head>
 <body>
@@ -403,8 +417,8 @@ mark{background:var(--yellow);border-radius:0;padding:0 2px;color:#000}
       <div><span class="n">Cost per approved drug</span><b>US$1bn to 2.6bn</b></div>
     </div>
   </div>
-  <section class="home-sec first"><h2>The map</h2><p class="sub">Six stages from target to market. Hover for a summary, click to open the page.</p>
-  <div class="graph-wrap"><canvas id="graph"></canvas>
+  <section class="home-sec first"><h2>The map</h2><p class="sub">Six stages from target to market. Hover or tab to a stage for a summary, click or press Enter to open its page.</p>
+  <div class="graph-wrap"><canvas id="graph" aria-hidden="true"></canvas><ol class="graph-a11y" id="graphA11y" aria-label="Pipeline map. Use Tab or the arrow keys to move between stages and Enter to open one."></ol>
     <div class="graph-legend"><span>Six stages, in order. Each opens its own page.</span><button class="btn" id="graphReset" style="padding:5px 12px;font-size:12.5px">Reset</button></div>
   </div>
   </section>
@@ -418,7 +432,7 @@ mark{background:var(--yellow);border-radius:0;padding:0 2px;color:#000}
       <div class="story-ctl"><button class="btn" id="storyPrev" title="Back">&larr;</button><button class="btn primary" id="storyPlay">Play</button><button class="btn" id="storyNext" title="Next">&rarr;</button><button class="btn" id="storyStop" title="Stop">Stop</button></div>
     </div>
     <div class="story-progress" id="storyProgress"></div>
-    <div class="story-card" id="storyCard"></div>
+    <div class="story-card" id="storyCard" aria-live="polite"></div>
   </div>
   </section>
   <section class="home-sec wide"><h2>All eight stages</h2><p class="sub">The same pipeline with Clinical split into its three phases. Hover for a summary, click to open.</p>
@@ -446,6 +460,8 @@ mark{background:var(--yellow);border-radius:0;padding:0 2px;color:#000}
 
 <section class="view" id="view-lanes" data-title="Parallel swimlanes by function" data-sub="Who is busy when. Shade is workload; hover a cell for a summary, click for detail. Legend below the grid." data-color="var(--teal)" data-icon="lanes">
   <div class="card">
+    <div class="role-bar" id="roleBar" role="group" aria-label="Filter the lanes by function"></div>
+    <p class="role-note muted" id="roleNote" aria-live="polite"></p>
     <div class="lanes-wrap"><div class="lanes" id="lanesGrid"></div></div>
     <div class="lane-detail" id="laneDetail"></div>
     <div class="lane-legend">
@@ -1170,7 +1186,7 @@ window.initStory = function(api){
   function first(t,n=1){ return String(t).replace(/<[^>]+>/g,'').split('. ').slice(0,n).join('. ').replace(/\.$/,'')+'.'; }
   function render(){
     const card = $('#storyCard');
-    if(step<0){ card.classList.remove('on'); $('#storyProgress').innerHTML=''; setStoryStage(null); return; }
+    if(step<0){ card.classList.remove('on'); $('#storyProgress').innerHTML=''; setStoryStage(null); api.onChange&&api.onChange(); return; }
     const sid = STORY_STEPS[step], s = stageById(sid);
     let what;
     if(mode.startsWith('ex')) what = EXAMPLE_STORY[+mode.slice(2)][sid];
@@ -1186,11 +1202,12 @@ window.initStory = function(api){
       <div class="story-actions"><button class="btn" id="storyOpen">Open the ${esc(s.name)} page &rarr;</button><span class="muted" style="font-size:12.5px">${playing?'<span class="live"></span>Playing: next step in 10 seconds. Pause to stay here.':'Paused. Use Next and Back, or press Play.'}</span></div>`;
     card.classList.add('on'); card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
     $('#storyOpen').addEventListener('click', ()=>{ stop(); navigate('stage-'+sid, $('#storyOpen')); });
-    $('#storyProgress').innerHTML = STORY_STEPS.map((id,i)=>`<button class="story-dot${i===step?' on':''}${i<step?' done':''}" data-i="${i}" title="${esc(stageById(id).name)}" style="--c:${stageById(id).color}"></button>`).join('');
+    $('#storyProgress').innerHTML = STORY_STEPS.map((id,i)=>`<button class="story-dot${i===step?' on':''}${i<step?' done':''}" data-i="${i}" title="${esc(stageById(id).name)}" aria-label="Step ${i+1} of ${STORY_STEPS.length}: ${esc(stageById(id).name)}"${i===step?' aria-current="step"':''} style="--c:${stageById(id).color}"></button>`).join('');
     document.querySelectorAll('.story-dot').forEach(d=>d.addEventListener('click',()=>{ goto(+d.dataset.i); }));
     setStoryStage(step);
     if(window.wrapTerms) window.wrapTerms(card);
     const r=card.getBoundingClientRect(); if(r.bottom>innerHeight||r.top<80) card.scrollIntoView({behavior:'smooth', block:'nearest'});
+    api.onChange&&api.onChange();
   }
   function goto(i){ step = Math.max(0, Math.min(STORY_STEPS.length-1, i)); render(); if(playing) schedule(); }
   function schedule(){ clearTimeout(timer); if(step>=STORY_STEPS.length-1){ playing=false; updateBtns(); render(); return; } timer=setTimeout(()=>{ goto(step+1); }, STEP_MS); }
@@ -1203,9 +1220,15 @@ window.initStory = function(api){
   $('#storyNext').addEventListener('click', ()=>{ goto(step+1); });
   $('#storyStop').addEventListener('click', stop);
   document.querySelectorAll('#storyModes .chip').forEach(c=>c.addEventListener('click', ()=>{ document.querySelectorAll('#storyModes .chip').forEach(x=>x.classList.toggle('on', x===c)); mode=c.dataset.mode; if(step<0){ play(); } else render(); }));
-  document.addEventListener('keydown', e=>{ if(step<0 || document.body.classList.contains('in-view') || e.target.tagName==='INPUT') return; if(e.key==='ArrowRight') goto(step+1); if(e.key==='ArrowLeft') goto(step-1); if(e.key===' '){ e.preventDefault(); playing?pause():play(); } });
+  document.addEventListener('keydown', e=>{ if(step<0 || document.body.classList.contains('in-view') || e.target.tagName==='INPUT' || e.target.closest('button,a,[tabindex]')) return; if(e.key==='ArrowRight') goto(step+1); if(e.key==='ArrowLeft') goto(step-1); if(e.key===' '){ e.preventDefault(); playing?pause():play(); } });
   updateBtns();
-
+  window.storyApi = {
+    get: ()=>({mode, step}),
+    set(m, s){
+      if(m && MODE_NAME[m]){ mode = m; document.querySelectorAll('#storyModes .chip').forEach(x=>x.classList.toggle('on', x.dataset.mode===m)); }
+      if(s!=null && !isNaN(s)){ playing=false; clearTimeout(timer); step=Math.max(0, Math.min(STORY_STEPS.length-1, s)); updateBtns(); render(); }
+    }
+  };
 };
 
 </script>
@@ -1266,7 +1289,8 @@ function layoutTargets(){
 }
 
 /* ---------- builders ---------- */
-function reset(){ nodes=[]; links=[]; byId={}; }
+let ver=0, a11yVer=-1;
+function reset(){ nodes=[]; links=[]; byId={}; ver++; }
 function build0(){
   reset(); level=0; focus=null;
   MACRO.forEach(m=>mk({id:'m-'+m.id, kind:'macro', macro:m, label:m.label, color:m.color, r:26, x:0, y:0}));
@@ -1350,7 +1374,7 @@ function draw(now){
   if(level===0 && !narrow()) drawRibbon(now);
   if(level===0 && narrow()) drawMolNarrow(now);
   ctx.font='400 12px '+M; ctx.fillStyle=TXT_MUTED; ctx.textAlign='center'; ctx.textBaseline='top';
-  const hint = level===0 ? 'Hover a stage for a summary. Click it to open its page.' : (focus&&focus.kind==='macro'&&focus.macro.phases ? 'Hover a phase for a summary. Click it to open it up. Click the background to go back.' : 'Click the centre node for its full page. Click any item to jump to it. Click the background to go back.');
+  const hint = level===0 ? 'Hover or tab to a stage for a summary. Click or press Enter to open its page.' : (focus&&focus.kind==='macro'&&focus.macro.phases ? 'Hover a phase for a summary. Click it to open it up. Click the background to go back.' : 'Click the centre node for its full page. Click any item to jump to it. Click the background to go back.');
   if(!narrow()) ctx.fillText(hint, W/2, 14);
 }
 /* time ribbon: segment widths follow typical durations (midpoints of the ranges shown on each page) */
@@ -1408,7 +1432,7 @@ function drawMolNarrow(now){
   ctx.beginPath(); ctx.arc(mx,my,4+1.5*pulse,0,Math.PI*2); ctx.fillStyle=ACC; ctx.fill(); ctx.strokeStyle='#000'; ctx.lineWidth=1.5; ctx.stroke();
 }
 function rr(x,y,w,h,r){ const [a,b,c,d]=r; ctx.beginPath(); ctx.moveTo(x+a,y); ctx.lineTo(x+w-b,y); ctx.quadraticCurveTo(x+w,y,x+w,y+b); ctx.lineTo(x+w,y+h-c); ctx.quadraticCurveTo(x+w,y+h,x+w-c,y+h); ctx.lineTo(x+d,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-d); ctx.lineTo(x,y+a); ctx.quadraticCurveTo(x,y,x+a,y); ctx.closePath(); }
-function frame(now){ tick(); draw(now); requestAnimationFrame(frame); }
+function frame(now){ tick(); draw(now); syncA11y(); requestAnimationFrame(frame); }
 
 /* ---------- interaction ---------- */
 function hit(mx,my){ let best=null,bd=1e9; nodes.forEach(n=>{ const [x,y]=toScreen(n); const d=Math.hypot(mx-x,my-y); if(d<n.r+8&&d<bd){ best=n; bd=d; } });
@@ -1441,6 +1465,44 @@ function activate(n){
   if(n.kind==='phase'){ if(focus&&focus.id===n.id) navigate('stage-'+n.stage, ghostFor(n)); else focusPhase(n.stage); return; }
   navigate(n.view, ghostFor(n), {open:n.open});
 }
+/* ---------- keyboard and screen reader layer: one real button per node, kept over the canvas ---------- */
+const a11y = document.getElementById('graphA11y');
+const KIND_ORDER = {macro:0, phase:1, opt:2, fn:3, gxp:4};
+const plain = h => { const d=document.createElement('div'); d.innerHTML=h; return d.textContent; };
+function nodeLabel(n){
+  if(n.kind==='macro'){ const m=n.macro, s=m.stage?stageById(m.stage):null;
+    return `${m.label}, stage ${MACRO.indexOf(m)+1} of ${MACRO.length}. ${s?STAGE_SUM[s.id]:m.sum} Typical duration: ${s?durShort(s):m.dur}. Press Enter to open its page.`; }
+  if(n.kind==='phase') return `${n.label}. ${STAGE_SUM[n.stage]} Press Enter to ${focus&&focus.id===n.id?'open its page':'open it up'}.`;
+  return `${n.label}. ${plain(n.sum)} Press Enter to jump to it.`;
+}
+let a11yFocusId = null;
+function syncA11y(){
+  if(a11yVer!==ver){
+    a11yVer = ver;
+    const hadFocus = a11y.contains(document.activeElement), keep = a11yFocusId;
+    a11y.innerHTML = '';
+    nodes.slice().sort((a,b)=>KIND_ORDER[a.kind]-KIND_ORDER[b.kind]).forEach(n=>{
+      const li = document.createElement('li'), b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-label', nodeLabel(n));
+      if(focus && focus.id===n.id) b.setAttribute('aria-current', 'true');
+      b.addEventListener('focus', ()=>{ a11yFocusId = n.id; hover = n; popFor(n); });
+      b.addEventListener('blur', ()=>{ if(hover===n) hover = null; hidePop(); });
+      b.addEventListener('click', ()=>activate(n));
+      li.appendChild(b); a11y.appendChild(li); n.btn = b;
+    });
+    if(hadFocus){ const t = (keep && byId[keep]) || focus || nodes[0]; if(t && t.btn) t.btn.focus({preventScroll:true}); }
+  }
+  nodes.forEach(n=>{ if(!n.btn) return; const [x,y] = toScreen(n); const d = Math.max(24, (n.r+6)*2), st = n.btn.style;
+    st.left = x+'px'; st.top = y+'px'; st.width = st.height = d+'px'; });
+}
+a11y.addEventListener('keydown', e=>{
+  const btns = Array.from(a11y.querySelectorAll('button')), i = btns.indexOf(document.activeElement);
+  if(e.key==='ArrowRight' || e.key==='ArrowDown'){ e.preventDefault(); btns[Math.min(btns.length-1, i+1)].focus(); }
+  else if(e.key==='ArrowLeft' || e.key==='ArrowUp'){ e.preventDefault(); btns[Math.max(0, i-1)].focus(); }
+  else if(e.key==='Home'){ e.preventDefault(); btns[0].focus(); }
+  else if(e.key==='End'){ e.preventDefault(); btns[btns.length-1].focus(); }
+  else if(e.key==='Escape' && level>0){ e.preventDefault(); a11yFocusId = null; back(); }
+});
 document.getElementById('graphReset').addEventListener('click', ()=>{ build0(); hidePop(); });
 window.setStoryStage = i => { storyStep = (i===null||i===undefined) ? null : STORY_STEPS[i]; };
 new ResizeObserver(()=>resize()).observe(wrap);
@@ -1589,6 +1651,36 @@ function renderExpedited(){
     EXPEDITED.map((e,i)=>col(e.name, `<p>${e.body}</p>`, {inner:true, id:'exp-'+i, sub:`<span class="tag ${e.region.includes('EU')&&!e.region.includes('US')?'eu':(e.region==='US'?'us':'')}">${e.region}</span>`})).join('') +
     `</div><div class="callout" style="margin-top:10px">Programme note: the rare paediatric disease priority review voucher programme lapsed in December 2024 and was reauthorised in February 2026 through September 2029. The EU pharmaceutical legislation reform, politically agreed in December 2025, will reshape incentives and exclusivity once it applies (expected around 2028); the current rules apply until then.</div>`;
 }
+const ROLE_GROUPS = {
+  all:{label:'All roles', keys:null},
+  discovery:{label:'Discovery', keys:['disc']},
+  'cmc-quality':{label:'CMC and Quality', keys:['cmc','an','qa','mfg']},
+  clinical:{label:'Clinical', keys:['clin']},
+  regulatory:{label:'Regulatory', keys:['reg']},
+  safety:{label:'Safety and PV', keys:['saf']},
+  systems:{label:'Systems', keys:['sys']}
+};
+let roles = 'all';
+function renderRoleBar(){
+  $('#roleBar').innerHTML = '<span class="lbl">Show</span>' + Object.entries(ROLE_GROUPS).map(([k,g])=>`<button type="button" class="chip" data-role="${k}" aria-pressed="false">${g.label}</button>`).join('');
+}
+function applyRoles(){
+  const g = ROLE_GROUPS[roles], grid = $('#lanesGrid');
+  const sel = new Set((g.keys||[]).map(k=>LANES.findIndex(l=>l.key===k)));
+  grid.classList.toggle('filtered', !!g.keys);
+  $$('.fn', grid).forEach((f,i)=>f.classList.toggle('sel', sel.has(i)));
+  $$('.cell', grid).forEach(c=>c.classList.toggle('sel', sel.has(+c.dataset.l)));
+  $$('#roleBar .chip').forEach(b=>{ const on = b.dataset.role===roles; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+  const note = $('#roleNote');
+  if(!g.keys){ note.textContent = ''; return; }
+  const lanes = LANES.filter(l=>g.keys.includes(l.key));
+  const lead = lanes.reduce((a,l)=>a + l.cells.filter(c=>c[0]===3).length, 0);
+  const many = lanes.length>1;
+  note.textContent = `Showing ${lanes.map(l=>l.name).join(', ')}. The ${lead} outlined cell${lead===1?' is':'s are'} where ${many?'these functions lead or sit':'this function leads or sits'} on the critical path.`;
+}
+function setRoles(r, quiet){ roles = r; applyRoles(); if(!quiet) syncHash(false); }
+document.addEventListener('click', e=>{ const b = e.target.closest('#roleBar .chip[data-role]'); if(b) setRoles(b.dataset.role); });
+
 function renderLanes(){
   let h = '<div class="hd">Function</div>' + LANE_STAGES.map(s=>`<div class="hd">${s}</div>`).join('');
   LANES.forEach((l,li)=>{
@@ -1710,8 +1802,7 @@ function navigate(id, fromEl, opts={}){
   hidePop(); pop.classList.remove('show');
   const target = viewEl(id); if(!target || id===current) return;
   const from = viewEl(current);
-  if(id==='home') location.hash = '';
-  else if(!opts.silent) location.hash = id;
+  if(!opts.silent) syncHash(true, id);
   const goingHome = id==='home';
   const finish = ()=>{
     from.classList.remove('on','leave','enter','enter-back');
@@ -1742,16 +1833,54 @@ function navigate(id, fromEl, opts={}){
   setTimeout(finish, 260);
   setTimeout(()=>ghost.remove(), 620);
 }
-function showFromHash(){
-  const h = location.hash.replace('#','');
-  const id = h && viewEl(h) ? h : 'home';
-  if(id===current) return;
-  const from = viewEl(current), target = viewEl(id);
-  from.classList.remove('on'); target.classList.add('on');
-  current = id; document.body.classList.toggle('in-view', id!=='home');
-  window.scrollTo(0,0);
+/* ---------- URL state: #stage=phase-2&modality=biologic, #view=lanes&roles=regulatory, #molecule=biologic&step=4 ---------- */
+const STAGE_SLUG = {disc:'discovery', pre:'preclinical', p1:'phase-1', p2:'phase-2', p3:'phase-3', sub:'submission', app:'approval', post:'post-market'};
+const MOD_SLUG = {all:'all', sm:'small-molecule', bio:'biologic', cgt:'cell-gene-therapy'};
+const MOL_SLUG = {sm:'small-molecule', bio:'biologic', cgt:'cell-gene-therapy'};
+const inv = o => Object.fromEntries(Object.entries(o).map(([k,v])=>[v,k]));
+let hashReady = false;
+function readHash(){
+  const h = location.hash.slice(1), st = {};
+  if(!h) return st;
+  if(!h.includes('=')){ st.view = decodeURIComponent(h); return st; }   // older links: #stage-p2, #lanes
+  const p = new URLSearchParams(h);
+  const sg = p.get('stage'); if(sg) st.view = 'stage-' + (inv(STAGE_SLUG)[sg] || sg);
+  else if(p.get('view')) st.view = p.get('view');
+  const md = inv(MOD_SLUG)[p.get('modality')]; if(md) st.mod = md;
+  const ml = inv(MOL_SLUG)[p.get('molecule')]; if(ml) st.molecule = ml;
+  const sp = parseInt(p.get('step'), 10); if(sp>=1) st.step = sp-1;
+  const rl = p.get('roles'); if(rl && ROLE_GROUPS[rl]) st.roles = rl;
+  return st;
 }
-window.addEventListener('popstate', showFromHash);
+function hashFor(v){
+  const p = new URLSearchParams();
+  if(v.startsWith('stage-')) p.set('stage', STAGE_SLUG[v.slice(6)] || v.slice(6));
+  else if(v!=='home' && v!=='search') p.set('view', v);
+  if(mod!=='all') p.set('modality', MOD_SLUG[mod]);
+  if(v==='lanes' && roles!=='all') p.set('roles', roles);
+  const st = window.storyApi && window.storyApi.get();
+  if(v==='home' && st && st.step>=0){ p.set('molecule', MOL_SLUG[st.mode] || st.mode); p.set('step', st.step+1); }
+  return p.toString();
+}
+function syncHash(push, viewId){
+  if(!hashReady) return;
+  const h = hashFor(viewId || current);
+  if(h ? location.hash==='#'+h : !location.hash) return;
+  history[push ? 'pushState' : 'replaceState'](null, '', h ? '#'+h : location.pathname+location.search);
+}
+function applyState(st){
+  const m = st.mod || 'all'; if(m!==mod) setMod(m, true);
+  const r = st.roles || 'all'; if(r!==roles) setRoles(r, true);
+  const id = st.view && viewEl(st.view) ? st.view : 'home';
+  if(id!==current){
+    const from = viewEl(current), target = viewEl(id);
+    from.classList.remove('on'); target.classList.add('on');
+    current = id; document.body.classList.toggle('in-view', id!=='home');
+    window.scrollTo(0,0);
+  }
+  if(window.storyApi && (st.molecule || st.step!=null)) window.storyApi.set(st.molecule, st.step);
+}
+window.addEventListener('popstate', ()=>applyState(readHash()));
 document.addEventListener('click', e=>{
   const n = e.target.closest('[data-nav]'); if(n){ navigate(n.dataset.nav, n); return; }
 });
@@ -1784,9 +1913,7 @@ function snippet(el, n=170){
   const t = b.textContent.replace(/\s+/g,' ').trim();
   return t.length>n ? t.slice(0,n).replace(/\s+\S*$/,'')+'…' : t;
 }
-document.addEventListener('mouseover', e=>{
-  const el = e.target.closest('[data-pop], .col > .col-h');
-  if(!el){ return; }
+function popForEl(el){
   if(el.classList.contains('col-h')){
     const c = el.parentElement; if(c.classList.contains('open')) { hidePop(); return; }
     const s = snippet(c); if(!s) return;
@@ -1808,6 +1935,27 @@ document.addEventListener('mouseover', e=>{
     const c = MX[+el.dataset.r][+el.dataset.c];
     showPop(el, `<b>${MX_ROWS[+el.dataset.r]} by ${MX_COLS[+el.dataset.c]}: ${F[c[0]]}</b>${esc(c[1])}`);
   }
+}
+document.addEventListener('mouseover', e=>{ const el = e.target.closest('[data-pop], .col > .col-h'); if(el) popForEl(el); });
+document.addEventListener('focusin', e=>{ const el = e.target; if(el.matches && el.matches('[data-pop], .col > .col-h') && el.matches(':focus-visible')) popForEl(el); });
+document.addEventListener('focusout', e=>{ if(e.target.matches && e.target.matches('[data-pop], .col > .col-h')) hidePop(); });
+
+/* ---------- keyboard access for clickable elements that are not buttons ---------- */
+function makeFocusable(root){
+  $$('.col > .col-h, .lanes .cell, .mx .c, [data-nav]:not(button):not([href])', root).forEach(el=>{
+    if(!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    if(!el.hasAttribute('role')) el.setAttribute('role', 'button');
+  });
+  $$('.col > .col-h', root).forEach(h=>h.setAttribute('aria-expanded', h.parentElement.classList.contains('open')));
+  $$('.lanes .cell', root).forEach(c=>{ const l = LANES[+c.dataset.l], cell = l.cells[+c.dataset.c];
+    c.setAttribute('aria-label', `${l.name} during ${LANE_STAGES[+c.dataset.c]}: ${cell[1] || 'Not active'}`); });
+  $$('.mx .c', root).forEach(c=>{ const cell = MX[+c.dataset.r][+c.dataset.c];
+    c.setAttribute('aria-label', `${MX_ROWS[+c.dataset.r]} by ${MX_COLS[+c.dataset.c]}: ${F[cell[0]]}`); });
+}
+document.addEventListener('keydown', e=>{
+  if(e.key!=='Enter' && e.key!==' ') return;
+  const el = e.target; if(!el.matches || !el.matches('[role="button"]:not(button)')) return;
+  e.preventDefault(); el.click();
 });
 document.addEventListener('mouseout', e=>{
   const el = e.target.closest('[data-pop], .col > .col-h'); if(!el) return;
@@ -1845,22 +1993,26 @@ function wrapTerms(root){
 document.addEventListener('click', e=>{
   const h = e.target.closest('.col-h'); if(!h) return;
   if(e.target.closest('.term')) return;
-  h.parentElement.classList.toggle('open'); hidePop();
+  h.parentElement.classList.toggle('open'); h.setAttribute('aria-expanded', h.parentElement.classList.contains('open')); hidePop();
 });
-$('#expandAll').addEventListener('click', ()=>$$('.col', viewEl(current)).forEach(c=>c.classList.add('open')));
-$('#collapseAll').addEventListener('click', ()=>{ const v=viewEl(current); $$('.col', v).forEach(c=>c.classList.remove('open')); $$('.lane-detail, .mx-detail', v).forEach(d=>d.classList.remove('show')); $$('.cell.open, .c.open', v).forEach(x=>x.classList.remove('open')); });
+$('#expandAll').addEventListener('click', ()=>{ $$('.col', viewEl(current)).forEach(c=>c.classList.add('open')); makeFocusable(viewEl(current)); });
+$('#collapseAll').addEventListener('click', ()=>{ const v=viewEl(current); $$('.col', v).forEach(c=>c.classList.remove('open')); $$('.lane-detail, .mx-detail', v).forEach(d=>d.classList.remove('show')); $$('.cell.open, .c.open', v).forEach(x=>x.classList.remove('open')); makeFocusable(v); });
 
 /* ---------- modality filter (delegated) ---------- */
 document.addEventListener('click', e=>{
-  const ch = e.target.closest('.chip[data-m]'); if(!ch) return;
-  mod = ch.dataset.m;
+  const ch = e.target.closest('.chip[data-m]'); if(ch) setMod(ch.dataset.m);
+});
+function setMod(m, quiet){
+  mod = m;
   $$('.chip[data-m]').forEach(x=>x.classList.toggle('on', x.dataset.m===mod));
   renderStair(); renderStages(); wrapTerms($('#stageViews'));
   // keep the current stage view visible after re-render
   if(current.startsWith('stage-')){ const v = viewEl(current); v.classList.add('on'); $$('.chip[data-m]', v).forEach(x=>x.classList.toggle('on', x.dataset.m===mod)); }
   const hl = {sm:['mod-sm','mod-pep'], bio:['mod-bio','mod-na'], cgt:['mod-cgt']}[mod] || [];
   $$('#modalityCards .col').forEach(c=>{ c.style.outline = hl.includes(c.id) ? '2px solid var(--gold)' : ''; });
-});
+  makeFocusable($('#stageViews'));
+  if(!quiet) syncHash(false);
+}
 
 /* ---------- search ---------- */
 let searchTimer;
@@ -1919,10 +2071,14 @@ renderStair(); renderHub(); renderStages(); renderClinical(); renderLanes(); ren
 decorateViews(document);
 wrapTerms($('#app'));
 $$('.tiles, .opts, .card, .col-b, #stageViews section, .org').forEach(p=>{ let i=0; Array.from(p.children).forEach(c=>{ if(c.classList.contains('tile')||c.classList.contains('col')||c.classList.contains('node')) c.style.setProperty('--i', i++); }); });
-showFromHash();
+renderRoleBar(); applyRoles(); makeFocusable(document);
+const initialState = readHash();
+applyState(initialState);
 window.wrapTerms = wrapTerms;
 if(window.initGraph) window.initGraph({STAGE_SUM, HUB, ICONS, navigate, showPopHtml, hidePop, esc, modRef:()=>mod, durShort});
-if(window.initStory) window.initStory({navigate, esc, STAGE_SUM, setStoryStage:(i)=>window.setStoryStage&&window.setStoryStage(i)});
+if(window.initStory) window.initStory({navigate, esc, STAGE_SUM, setStoryStage:(i)=>window.setStoryStage&&window.setStoryStage(i), onChange:()=>syncHash(false)});
+if(window.storyApi && current==='home' && (initialState.molecule || initialState.step!=null)) window.storyApi.set(initialState.molecule, initialState.step);
+hashReady = true; syncHash(false);
 })();
 
 </script>
