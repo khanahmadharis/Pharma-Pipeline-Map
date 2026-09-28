@@ -1678,7 +1678,7 @@ function applyRoles(){
   const many = lanes.length>1;
   note.textContent = `Showing ${lanes.map(l=>l.name).join(', ')}. The ${lead} outlined cell${lead===1?' is':'s are'} where ${many?'these functions lead or sit':'this function leads or sits'} on the critical path.`;
 }
-function setRoles(r, quiet){ roles = r; applyRoles(); if(!quiet) syncHash(false); }
+function setRoles(r, quiet){ roles = r; applyRoles(); if(!quiet){ syncHash(false); if(r!=='all') countEvent('role-filter/' + r); } }
 document.addEventListener('click', e=>{ const b = e.target.closest('#roleBar .chip[data-role]'); if(b) setRoles(b.dataset.role); });
 
 function renderLanes(){
@@ -1867,6 +1867,7 @@ function syncHash(push, viewId){
   const h = hashFor(viewId || current);
   if(h ? location.hash==='#'+h : !location.hash) return;
   history[push ? 'pushState' : 'replaceState'](null, '', h ? '#'+h : location.pathname+location.search);
+  if(push) countView(viewId || current);
 }
 function applyState(st){
   const m = st.mod || 'all'; if(m!==mod) setMod(m, true);
@@ -1879,8 +1880,30 @@ function applyState(st){
     window.scrollTo(0,0);
   }
   if(window.storyApi && (st.molecule || st.step!=null)) window.storyApi.set(st.molecule, st.step);
+  if(hashReady) countView(current);
 }
 window.addEventListener('popstate', ()=>applyState(readHash()));
+
+/* ---------- visit counting: GoatCounter, cookieless, no external script ---------- */
+const GC = 'https://pharmapipelinemap.goatcounter.com/count';
+const gcLive = location.hostname==='khanahmadharis.github.io';
+let gcLast = null;
+function gcSend(params){
+  if(!gcLive) return;
+  params.s = [screen.width, screen.height, window.devicePixelRatio||1].join(',');
+  params.rnd = Math.random().toString(36).slice(2);
+  const img = new Image(); img.src = GC + '?' + new URLSearchParams(params);
+}
+function countView(v){
+  if(!v || v==='search') return;
+  const key = v==='home' ? '' : (v.startsWith('stage-') ? 'stage=' + (STAGE_SLUG[v.slice(6)] || v.slice(6)) : 'view=' + v);
+  if(key===gcLast) return;
+  const first = gcLast===null; gcLast = key;
+  gcSend({p: location.pathname + (key ? '#' + key : ''), t: v==='home' ? document.title : viewTitle(viewEl(v)) + ' | ' + document.title,
+    r: first ? document.referrer : '', q: first ? location.search : ''});
+}
+function countEvent(name){ gcSend({p: name, t: name, e: 'true'}); }
+document.addEventListener('click', e=>{ const c = e.target.closest('#storyModes .chip[data-mode]'); if(c) countEvent('follow-a-molecule/' + (MOL_SLUG[c.dataset.mode] || c.dataset.mode)); });
 document.addEventListener('click', e=>{
   const n = e.target.closest('[data-nav]'); if(n){ navigate(n.dataset.nav, n); return; }
 });
@@ -2078,7 +2101,7 @@ window.wrapTerms = wrapTerms;
 if(window.initGraph) window.initGraph({STAGE_SUM, HUB, ICONS, navigate, showPopHtml, hidePop, esc, modRef:()=>mod, durShort});
 if(window.initStory) window.initStory({navigate, esc, STAGE_SUM, setStoryStage:(i)=>window.setStoryStage&&window.setStoryStage(i), onChange:()=>syncHash(false)});
 if(window.storyApi && current==='home' && (initialState.molecule || initialState.step!=null)) window.storyApi.set(initialState.molecule, initialState.step);
-hashReady = true; syncHash(false);
+hashReady = true; syncHash(false); countView(current);
 })();
 
 </script>
