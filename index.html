@@ -150,6 +150,58 @@ body.in-view .btn.back{display:inline-flex}
 .graph-legend .btn{border-color:#000;color:#000;background:#fff;padding:6px 12px;font-size:12.5px}
 .graph-legend .btn:hover{background:var(--yellow)}
 @media (max-width:760px){.graph-wrap{height:460px;border-radius:0}.graph-legend{display:none}}
+.btn[aria-pressed="true"]{background:#000;color:#fff;border-color:#000}
+.btn[aria-pressed="true"]:hover{background:#222}
+/* Software grid */
+.sw-key{display:flex;flex-direction:column;gap:8px;margin:4px 0 12px;font-size:13px}
+.sw-legend{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+.sw-legend .lbl{font-family:"JetBrains Mono",monospace;font-size:12px;min-width:170px}
+.sw-lg{display:inline-flex;align-items:center;gap:8px}
+.sw-lg b{display:inline-block;width:20px;height:20px;border:1px solid #000;background:#fff}
+.sw-lg b.m0{border-color:rgba(0,0,0,.18)} .sw-lg b.m1{opacity:.4} .sw-lg b.m2{opacity:.75}
+i.sw{display:inline-block;width:11px;height:11px;border:1px solid #000;vertical-align:-1px;margin-right:6px;flex:none}
+.sw-group{margin:12px 0 4px}
+.sw-grid-wrap{overflow-x:auto;border:1px solid #000;background:#fff}
+.sw-grid{border-collapse:separate;border-spacing:0;width:100%;min-width:760px;font-size:13.5px}
+.sw-grid th,.sw-grid td{padding:0;border-bottom:1px solid #000;text-align:center;vertical-align:middle}
+.sw-grid thead th{font:500 11.5px/1.2 "JetBrains Mono",monospace;letter-spacing:.02em;padding:10px 4px 8px;border-left:1px solid #000;position:relative}
+.sw-grid thead th i{display:block;height:6px;border:1px solid #000;border-bottom:0;margin:0 0 6px}
+.sw-grid th.rowh{text-align:left;padding:8px 12px;font:500 13.5px/1.3 "Outfit",sans-serif;text-transform:none;letter-spacing:0;position:sticky;left:0;background:#fff;z-index:1;width:34%;min-width:230px;border-right:1px solid #000}
+.sw-grid thead th.rowh{font:500 11.5px/1.2 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em}
+.sw-grid th.rowh button{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:2px 0;font:inherit;line-height:1.3}
+.sw-grid th.rowh button:hover{text-decoration:underline}
+.sw-grid tr.on th.rowh{background:#000;color:#fff}
+.sw-grid tr.on th.rowh i.sw{border-color:#fff}
+.sw-grid tr.dim{opacity:.25}
+.sw-grid td{border-left:1px solid #000;height:38px}
+.sw-grid td b{display:block;width:26px;height:26px;margin:0 auto;border:1px solid #000;background:#fff;cursor:pointer;transition:transform .15s var(--ease)}
+.sw-grid td b.m0{border-color:rgba(0,0,0,.18);background:#fff;cursor:default}
+.sw-grid td b.m1{opacity:.4}
+.sw-grid td b.m2{opacity:.75}
+.sw-grid td b:hover{transform:scale(1.15)}
+.sw-grid td b.hot{outline:2px solid #000;outline-offset:1px;background:var(--yellow)!important;opacity:1}
+.sw-grid tfoot td{height:auto;padding:8px;text-align:left;font-size:12.5px;border-left:0;border-bottom:0}
+.sw-panel{margin-top:14px;border:1px solid #000;background:#fff;padding:16px 18px 18px}
+.swp-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}
+.swp-head h3{margin:0 0 4px;font-size:20px;letter-spacing:-.01em}
+.swp-head .muted{margin:0;font-size:14px}
+.swp-num{flex:none;width:34px;height:34px;border:1px solid #000;display:grid;place-items:center;font:500 13px "JetBrains Mono",monospace}
+.swp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 28px;border-top:1px solid #000;padding-top:12px}
+.swp-grid>div{min-width:0}
+.swp-grid .span2{grid-column:1 / -1}
+.swp-grid h3.k4{margin:0 0 6px}
+.swp-grid p{margin:0 0 6px;font-size:14px}
+.swp-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;border-top:1px solid #000;padding-top:12px}
+.tag.link{cursor:pointer;font:inherit;font-size:12.5px;background:#fff}
+.tag.link:hover{background:var(--yellow)}
+.sw-list{list-style:none;margin:0;padding:0;border-top:1px solid #000}
+.sw-list li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:4px 16px;padding:9px 0;border-bottom:1px solid #000;font-size:14px;line-height:1.45}
+.sw-list .sw-n a{font-weight:600}
+.ev{display:inline-block;font:500 10.5px "JetBrains Mono",monospace;letter-spacing:.04em;border:1px solid #000;padding:1px 5px;margin-left:4px;background:var(--t-lime);vertical-align:1px;white-space:nowrap}
+.sw-meter{display:inline-grid;grid-template-columns:repeat(8,22px);gap:3px}
+.sw-meter i{height:14px;border:1px solid #000;background:#fff}
+.sw-meter i.m1{background:var(--t-lime)} .sw-meter i.m2{background:var(--t-sage)} .sw-meter i.m3{background:#000}
+@media (max-width:760px){.swp-grid{grid-template-columns:1fr}.sw-list li{grid-template-columns:1fr}.sw-grid th.rowh{min-width:170px;font-size:12.5px}.sw-grid{min-width:620px}}
 .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0 32px;font-size:13.5px;color:var(--muted);margin:22px 0 0;border-top:1px solid var(--line)}
 .legend span{display:block;padding:12px 0;border-bottom:1px solid #000;line-height:1.5}
 .approx{color:#000;font-weight:500;font-size:10.5px;font-family:"JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;background:var(--yellow);border:1px solid #000;padding:1px 6px;border-radius:0;margin-left:6px;vertical-align:middle;transform:rotate(-2deg);display:inline-block}
@@ -438,6 +490,11 @@ mark{background:var(--yellow);border-radius:0;padding:0 2px;color:#000}
   <section class="home-sec wide"><h2>All eight stages</h2><p class="sub">The same pipeline with Clinical split into its three phases. Hover for a summary, click to open.</p>
   <div class="card" style="padding:10px 18px 18px"><div class="map"><div class="map-in" id="stair"></div></div></div>
   </section>
+  <section class="home-sec wide" id="software"><h2>The software along the path</h2><p class="sub">Which systems run each stage. A darker square means the category is more central there. Hover a square for a summary, click a row for the products and where the evidence comes from.</p>
+  <div class="sw-key" id="swKey"></div>
+  <div class="sw-grid-wrap"><table class="sw-grid" id="swGrid" aria-label="Software categories by pipeline stage"></table></div>
+  <div class="sw-panel" id="swPanel" hidden></div>
+  </section>
 
   <section class="home-sec"><h2>Browse by section</h2><p class="sub">Everything around the pipeline: the three axes, the functions, the rules and the systems.</p>
     <div class="tiles" id="hubTiles"></div>
@@ -550,7 +607,7 @@ const STAGES = [
   mod:{
     sm:`Healthy volunteers are usual outside oncology; SAD and MAD run fast. Formulation often changes from a simple FIH form to a tablet, requiring a bridging study. Metabolite identification in humans (MIST) starts here.`,
     bio:`Often dosed in patients; starting doses are more conservative for agonists. Anti-drug antibody (immunogenicity) monitoring is mandatory. IV infusion is common initially even if the target commercial form is subcutaneous, creating a later bridging need. Process changes between Phase 1 and 2 are frequent and trigger comparability work.`,
-    cgt:`Almost always patients, often with a 3+3 or Bayesian dose escalation and a seamless Phase 1/2 design. Lymphodepletion, cytokine release syndrome and neurotoxicity management are part of the protocol for CAR-T. Long-term follow-up (up to 15 years for integrating vectors under FDA guidance) is planned from the first patient. Manufacturing slots and vein-to-vein time are part of trial logistics.`
+    cgt:`Almost always patients, often with a 3+3 or Bayesian dose escalation and a combined Phase 1/2 design. Lymphodepletion, cytokine release syndrome and neurotoxicity management are part of the protocol for CAR-T. Long-term follow-up (up to 15 years for integrating vectors under FDA guidance) is planned from the first patient. Manufacturing slots and vein-to-vein time are part of trial logistics.`
   }
 },
 {
@@ -560,7 +617,7 @@ const STAGES = [
   functions:['Clinical development and biostatistics','Clinical operations (multi-site, often multi-country)','Pharmacovigilance','CMC: process characterisation, commercial process and site decisions','Analytical development (validation, specification setting)','Quality','Regulatory (EoP2, scientific advice, designations)','Commercial and market access (early forecasting, TPP refresh)','Medical affairs (KOL engagement)'],
   gxp:`GCP, GMP and trial safety reporting as in Phase 1. Quality expectations on the IMP rise with patient numbers and exposure duration. Data integrity scrutiny on clinical databases (EDC) and on CMC data intensifies as it will support the filing.`,
   deliverables:['Phase 2 CSRs and integrated analysis','Dose selection rationale and exposure-response modelling','Phase 3 protocol, statistical analysis plan, endpoint justification','EoP2 meeting package and minutes; EU scientific advice','Commercial formulation and presentation decision; bridging or biocomparability plan','Draft commercial specifications; process characterisation plan','Paediatric plan (PIP in EU, PSP in US) typically due around end of Phase 2'],
-  gate:`Go/no-go for Phase 3, the largest single financial commitment in the programme. The decision weighs the efficacy signal, the dose, the competitive landscape, the commercial forecast and the CMC readiness to make launch-representative material.`,
+  gate:`Go/no-go for Phase 3, the largest single financial commitment in the programme. The decision weighs the efficacy signal, the dose, the competition, the commercial forecast and the CMC readiness to make launch-representative material.`,
   mod:{
     sm:`Final salt, solid form and tablet formulation should be locked before Phase 3, with dissolution methods that are discriminating. Process characterisation and control strategy development follow ICH Q8, Q9 and Q11. Generic-defensible IP (formulation, polymorph) is filed.`,
     bio:`Process changes are common (media, scale, purification) and each needs comparability under ICH Q5E: analytical first, with PK or clinical bridging if the analytical picture is not clean. Moving from IV to a high-concentration subcutaneous product is a typical Phase 2 to 3 transition. Potency assays must be validated before pivotal material is released.`,
@@ -796,7 +853,7 @@ const DOSAGE = [
 {id:'oral', name:'Oral', color:'var(--navy)', tagline:'Tablets, capsules, liquids; the default for small molecules',
  what:`Swallowed and absorbed through the gut. Tablets (immediate release, modified release, orally disintegrating), capsules (hard and soft), oral solutions, suspensions and powders for reconstitution. Convenient, cheap to make, no sterility requirement, but the drug must survive acid and enzymes, dissolve, cross the gut wall and survive first-pass metabolism in the liver.`,
  cmc:['Biopharmaceutics Classification System (BCS): solubility and permeability decide whether formulation can help (class II needs solubility enhancement; class III and IV are hard)','Solid form (polymorph, salt), particle size and excipients determine dissolution','Manufacturing: blending, granulation (wet or dry), compression, coating; continuous manufacturing increasingly used (ICH Q13)','Food effect and drug interaction studies define the label','Paediatric forms (mini-tablets, liquids, taste masking) are separate developments'],
- analytical:['Dissolution testing is the critical link to in vivo performance and the key comparability and bioequivalence tool','Content uniformity, assay, related substances, water content','Stability with humidity as a major stressor'],
+ analytical:['Dissolution testing is the critical link to in vivo performance and the main comparability and bioequivalence tool','Content uniformity, assay, related substances, water content','Stability with humidity as a major stressor'],
  mod:`Realistic for small molecules and a few cyclic or enhanced peptides. Not realistic for proteins, antibodies, nucleic acids or cells for systemic effect, because they are digested or not absorbed.`},
 {id:'par', name:'Parenteral (injection and infusion)', color:'var(--teal)', tagline:'IV, SC, IM and specialised routes; sterile products',
  what:`Delivered by injection or infusion, bypassing the gut. Intravenous (bolus or infusion, immediate systemic exposure), subcutaneous (self-administration, slower absorption, volume limits of about 1 to 2 mL unless enhanced), intramuscular (vaccines, depots), and specialised routes such as intrathecal (into cerebrospinal fluid), intravitreal (into the eye), intra-articular and intratumoural. Presentations: vials (liquid or lyophilised), prefilled syringes, cartridges in pens, autoinjectors, infusion bags.`,
@@ -834,7 +891,7 @@ const DOSAGE = [
 const MX_COLS = ['Oral','Parenteral','Inhaled','Topical / transdermal','Other (nasal, ophthalmic, implant)'];
 const MX_ROWS = ['Small molecules','Peptides','Biologics','Nucleic acids','Cell and gene therapies','Hybrids and conjugates'];
 const MX = [
- [ ['common','The default. Absorption depends on solubility and permeability (BCS class). Immediate and modified release, fixed-dose combinations, paediatric liquids. Dissolution is the key performance test and the tool for bioequivalence of generics.'],
+ [ ['common','The default. Absorption depends on solubility and permeability (BCS class). Immediate and modified release, fixed-dose combinations, paediatric liquids. Dissolution is the main performance test and the tool for bioequivalence of generics.'],
    ['common','Used when oral fails (poor bioavailability, no oral tolerance, need for rapid onset, hospital setting) and for long-acting injectables such as monthly antipsychotic depots. Needs sterile manufacture, solubilisation strategies, and often lyophilisation for unstable actives.'],
    ['common','Standard for asthma and COPD: bronchodilators and corticosteroids in MDIs and DPIs. Requires micronisation or particle engineering and a co-developed device; generics are difficult because equivalence rests on in vitro and clinical endpoint data.'],
    ['common','Dermatology (steroids, retinoids, antifungals), local anaesthetics, and transdermal patches for systemic delivery of potent lipophilic drugs (nicotine, fentanyl, hormones). Semisolid microstructure and in vitro permeation define equivalence.'],
@@ -879,7 +936,7 @@ const EXAMPLES = [
  lanes:`Analytical highlights: SEC, CEX, CE-SDS, peptide mapping by LC-MS, glycan profiling, cell-based potency assay, host cell protein ELISA, residual DNA qPCR, sterility, endotoxin, subvisible particles, injection force. Systems: sequence and clone databases in discovery, then LIMS, CDS, ELN and SDMS validated for GMP; MES and electronic batch records at the commercial site; RIM for the global variation workload.`},
 {name:'An autologous CAR-T cell therapy for a blood cancer', color:'var(--pink)',
  axes:[['Modality','Cell and gene therapy: patient T cells transduced ex vivo with a lentiviral vector encoding a chimeric antigen receptor'],['Dosage form','Cryopreserved cell suspension in an infusion bag; single IV infusion after lymphodepleting chemotherapy'],['Site and release','Systemic living product that expands in the patient; no release rate in the usual sense'],['Route to market','BLA to CBER with RMAT designation and accelerated approval; EU ATMP assessed by CAT, conditional marketing authorisation; 15-year long-term follow-up']],
- story:`Discovery designs the receptor and the vector construct and chooses a T cell manufacturing concept. Preclinical: in vitro potency and specificity, mouse xenograft efficacy, biodistribution and persistence, replication-competent lentivirus testing, a GMP vector lot from a specialist CDMO, a phase-appropriate potency assay concept, IND to CBER. Phase 1/2 seamless trial in relapsed patients at a handful of academic centres; each patient's cells are shipped to the manufacturing site, processed over about two weeks, cryopreserved and returned; cytokine release syndrome management is built into the protocol. The pivotal study is a single-arm Phase 2 with response rate as the endpoint. CMC in parallel: process moved from open manual steps to a closed automated platform, requiring a comparability study on limited material; a quantitative potency assay (cytotoxicity plus cytokine release) validated before pivotal batches; chain of identity and chain of custody system validated; commercial facility qualified for scale-out. BLA with accelerated approval and post-marketing confirmatory requirements; EU conditional MA. Post-market: treatment centre onboarding, a long-term follow-up registry, a process change to shorten vein-to-vein time filed as a prior approval supplement with comparability data, and secondary malignancy signal evaluation under GVP.`,
+ story:`Discovery designs the receptor and the vector construct and chooses a T cell manufacturing concept. Preclinical: in vitro potency and specificity, mouse xenograft efficacy, biodistribution and persistence, replication-competent lentivirus testing, a GMP vector lot from a specialist CDMO, a phase-appropriate potency assay concept, IND to CBER. Combined Phase 1/2 trial in relapsed patients at a handful of academic centres; each patient's cells are shipped to the manufacturing site, processed over about two weeks, cryopreserved and returned; cytokine release syndrome management is built into the protocol. The pivotal study is a single-arm Phase 2 with response rate as the endpoint. CMC in parallel: process moved from open manual steps to a closed automated platform, requiring a comparability study on limited material; a quantitative potency assay (cytotoxicity plus cytokine release) validated before pivotal batches; chain of identity and chain of custody system validated; commercial facility qualified for scale-out. BLA with accelerated approval and post-marketing confirmatory requirements; EU conditional MA. Post-market: treatment centre onboarding, a long-term follow-up registry, a process change to shorten vein-to-vein time filed as a prior approval supplement with comparability data, and secondary malignancy signal evaluation under GVP.`,
  lanes:`Analytical highlights: flow cytometry for identity and transduction efficiency, vector copy number by ddPCR, viability and cell count, potency bioassay, rapid sterility, mycoplasma by PCR, endotoxin, replication-competent lentivirus. Vector: titre, purity, residual DNA and protein. Systems: apheresis scheduling and chain-of-identity platform, LIMS with patient-batch linkage, MES for the closed process, cryostorage monitoring; all validated, with data integrity a focus at inspection.`}
 ];
 
@@ -993,7 +1050,7 @@ const SYSTEMS = [
 {name:'Data platforms, analytics and AI', where:'Emerging across R&D, quality and manufacturing', gxp:'Depends on intended use; validated when outputs influence GxP decisions', body:`Data lakes, FAIR data initiatives, statistical and machine-learning tools for process monitoring, batch release support, PV case triage and document drafting. Validation follows GAMP 5 second edition and the FDA Computer Software Assurance guidance (final, September 2025), which shifts effort towards critical thinking and risk-based testing; the EU draft Annex 22 addresses AI in GMP.`}
 ];
 const CSV_NOTES = `<p><b>Where validation starts.</b> Computerised system validation (CSV) becomes an obligation when a system creates, modifies, stores, or reports a record that a GxP regulation requires. In practice the first such records are the GLP toxicology study data and the QC data for the first GMP batch, both in the preclinical stage. Research systems before that point are usually outside formal validation but are increasingly held to data integrity expectations because their data may later be inspected.</p>
-<p><b>How it is done.</b> GAMP 5 (second edition, 2022) provides the risk-based lifecycle model: categorise the software, assess the risk to patient safety, product quality and data integrity, then scale the specification, verification and documentation accordingly. Supplier assessment and leveraging supplier testing are encouraged. FDA's Computer Software Assurance guidance (final September 2025, for production and quality system software) formalises the shift away from exhaustive scripted testing towards critical thinking, unscripted and ad hoc testing where risk allows, and lighter documentation. 21 CFR Part 11 (US) and EU GMP Annex 11 (2011, with a draft revision published July 2025 alongside a draft Annex 22 on AI) set the controls: validation, audit trails, access control, electronic signatures, data backup and archiving, periodic review.</p>
+<p><b>How it is done.</b> GAMP 5 (second edition, 2022) provides the risk-based lifecycle model: categorise the software, assess the risk to patient safety, product quality and data integrity, then scale the specification, verification and documentation accordingly. Supplier assessment and relying on supplier testing are encouraged. FDA's Computer Software Assurance guidance (final September 2025, for production and quality system software) formalises the shift away from exhaustive scripted testing towards critical thinking, unscripted and ad hoc testing where risk allows, and lighter documentation. 21 CFR Part 11 (US) and EU GMP Annex 11 (2011, with a draft revision published July 2025 alongside a draft Annex 22 on AI) set the controls: validation, audit trails, access control, electronic signatures, data backup and archiving, periodic review.</p>
 <p><b>Data integrity.</b> ALCOA+ (attributable, legible, contemporaneous, original, accurate, plus complete, consistent, enduring, available) is the common vocabulary across MHRA (2018), FDA (2018 Q&A), PIC/S PI 041 (2021) and WHO (2021) guidance. Inspection findings in labs cluster around audit trail review, shared accounts, manual integration in chromatography, and unreported testing into compliance.</p>
 <p><b>Lifecycle.</b> A validated system stays validated only through change control, periodic review, patch management, supplier updates, and controlled data migration when it is replaced. Retirement requires the data to remain readable for the retention period, which for a marketed product can exceed the life of the system.</p>`;
 
@@ -1132,6 +1189,256 @@ const GLOSSARY = {
 
 </script>
 <script>
+/* ===================== SOFTWARE ALONG THE PATH (home grid data) =====================
+   Researched Oct 2026 from vendor pages, G2 and SourceForge category pages (product names only), ELN-Finder,
+   IntuitionLabs and QPillars comparisons, company job postings and consortium pages.
+   Stage intensity (0 to 3) per stage in STAGES order: disc, pre, p1, p2, p3, sub, app, post.
+   It is an illustrative judgement of how central the category is at that stage, not a measurement.
+   Products are examples seen in the sources, not endorsements and not a complete market. */
+const SW_DOMAINS = {
+  nonclin:{name:'Discovery and nonclinical', color:'var(--t-sage)', hex:'#b3bd95'},
+  lab:{name:'Lab informatics', color:'var(--t-steel)', hex:'#a5b8c0'},
+  clin:{name:'Clinical', color:'var(--t-peri)', hex:'#8c9ae0'},
+  reg:{name:'Regulatory', color:'var(--t-sky)', hex:'#9ab6c8'},
+  qual:{name:'Quality', color:'var(--t-salmon)', hex:'#d77a7a'},
+  mfg:{name:'Manufacturing, supply and commercial', color:'var(--t-peach)', hex:'#e6915d'},
+  safe:{name:'Safety', color:'var(--t-olive)', hex:'#8e8a25'},
+  data:{name:'Data and AI platforms', color:'var(--t-lime)', hex:'#c0d4a7'}
+};
+const SW_EVID = {v:'vendor page', c:'vendor case study or customer list', j:'job posting', l:'catalogue listing', s:'standard or consortium', t:'third-party source'};
+const SOFTWARE = [
+ {key:'dinf', name:'Discovery informatics and molecular design', dom:'nonclin', gxp:'Not regulated. Research data, increasingly held to data integrity expectations.',
+  what:'Design-make-test-analyse tools: compound registration, assay data, SAR analysis, docking and free energy calculations.',
+  v:[3,1,0,0,0,0,0,0],
+  products:[
+   {n:'LiveDesign and Maestro', vendor:'Schrodinger', note:'Customers named on the vendor page include Morphic, Galapagos and Takeda.', ev:'c', url:'https://www.schrodinger.com/platform/products/livedesign/'},
+   {n:'CDD Vault', vendor:'Collaborative Drug Discovery', note:'Hosted registration, assay and SAR database with an ELN.', ev:'v', url:'https://www.collaborativedrug.com/'},
+   {n:'D360', vendor:'Certara', note:'Vendor says 6,000 plus scientists use it.', ev:'v', url:'https://www.certara.com/d360-scientific-informatics-platform/'},
+   {n:'Design Hub', vendor:'Chemaxon (Certara)', note:'Sketch, prioritise and track compound ideas with CROs.', ev:'v', url:'https://www.certara.com/design-hub/'},
+   {n:'Flare', vendor:'Cresset', note:'Docking, FEP and SAR; AstraZeneca and Evotec quoted on the vendor page.', ev:'c', url:'https://cresset-group.com/software/flare/'},
+   {n:'Orion', vendor:'Cadence Molecular Sciences (OpenEye)', note:'Cloud molecular design platform.', ev:'v', url:'https://www.eyesopen.com/'},
+   {n:'Luma', vendor:'Dotmatics', note:'R&D data platform; Dotmatics merged with Insightful Science (SnapGene, GraphPad, Geneious).', ev:'v', url:'https://www.dotmatics.com/luma'}
+  ]},
+ {key:'eln', name:'Electronic lab notebook (ELN)', dom:'lab', gxp:'Non-regulated in discovery; GLP and GMP expectations once the notebook records development or QC work (21 CFR Part 11 and Annex 11 when electronic records are required).',
+  what:'Where experiments are planned and recorded. The Pistoia Alliance 2025 survey found ELNs the most widely used lab technology (81 percent of respondents).',
+  v:[3,3,2,2,2,1,1,1],
+  products:[
+   {"n": "Signals Notebook", "vendor": "Revvity Signals", "note": "Enterprise cloud ELN for chemistry and biology; Part 11 readiness and validation packs; GSK, Pfizer and Merck listed on the vendor page.", "ev": "c", "url": "https://revvitysignals.com/products/research/signals-notebook-eln", "group": "Enterprise and regulated"},
+   {"n": "E-WorkBook and Polar", "vendor": "IDBS", "note": "Enterprise ELN and GxP data platform for pharma R&D, process and bioprocess development.", "ev": "v", "url": "https://www.idbs.com/products/e-workbook/", "group": "Enterprise and regulated"},
+   {"n": "BIOVIA Notebook and ONE Lab", "vendor": "Dassault Systemes", "note": "ELN in a unified lab platform with LIMS and lab execution.", "ev": "v", "url": "https://www.3ds.com/products/biovia/one-lab", "group": "Enterprise and regulated"},
+   {"n": "LabWare ELN", "vendor": "LabWare", "note": "ELN integrated with LabWare LIMS for regulated labs.", "ev": "v", "url": "https://www.labware.com/our-platform/labware-lims", "group": "Enterprise and regulated"},
+   {"n": "LabVantage ELN", "vendor": "LabVantage Solutions", "note": "ELN inside the LabVantage platform alongside LIMS, LES and SDMS.", "ev": "v", "url": "https://www.labvantage.com/", "group": "Enterprise and regulated"},
+   {"n": "Sapio ELN", "vendor": "Sapio Sciences", "note": "Configurable AI-assisted ELN on the Sapio platform.", "ev": "v", "url": "https://www.sapiosciences.com/products/electronic-lab-notebook/", "group": "Enterprise and regulated"},
+   {"n": "OpenLab ELN", "vendor": "Agilent", "note": "ELN for analytical labs on the OpenLab platform.", "ev": "l", "url": "https://www.agilent.com/en/product/software-informatics", "group": "Enterprise and regulated"},
+   {"n": "SciCord", "vendor": "SciCord", "note": "Spreadsheet-style structured ELN for regulated QC and R&D labs.", "ev": "v", "url": "https://scicord.com/", "group": "Enterprise and regulated"},
+   {"n": "CERF", "vendor": "Lab-Ally", "note": "ELN for regulated pharma and biomedical labs; vendor states 21 CFR Part 11 and GxP; cloud, on-premise or air-gapped.", "ev": "v", "url": "https://cerf-notebook.com/", "group": "Enterprise and regulated"},
+   {"n": "OpreX Informatics Manager", "vendor": "Yokogawa", "note": "Experimental data manager for pharma R&D.", "ev": "v", "url": "https://www.yokogawa.co.jp/solutions/products-and-services/life-science/oprex-informatics-manager/", "group": "Enterprise and regulated"},
+   {"n": "Logilab ELN", "vendor": "Agaram Technologies", "note": "ELN linked to the vendor LIMS, used in Indian pharma.", "ev": "v", "url": "https://logilabeln.com/", "group": "Enterprise and regulated"},
+   {"n": "Benchling", "vendor": "Benchling", "note": "Cloud ELN, registry and workflows for biotech R&D; vendor names Sanofi, Moderna and Gilead; an Amgen posting names it for antibody discovery.", "ev": "j", "url": "https://www.benchling.com/", "group": "Biotech and mid-size labs"},
+   {"n": "Dotmatics", "vendor": "Dotmatics", "note": "ELN, registration, inventory and data search on the Luma platform.", "ev": "v", "url": "https://www.dotmatics.com/", "group": "Biotech and mid-size labs"},
+   {"n": "LabArchives", "vendor": "LabArchives", "note": "ELN widely used in universities, institutes and biotech.", "ev": "v", "url": "https://www.labarchives.com/", "group": "Biotech and mid-size labs"},
+   {"n": "Labguru", "vendor": "Labguru (Cenevo)", "note": "Cloud ELN with inventory and sample tracking for smaller labs.", "ev": "v", "url": "https://www.labguru.com/", "group": "Biotech and mid-size labs"},
+   {"n": "SciNote", "vendor": "SciNote", "note": "Workflow-based ELN for academic and biotech labs.", "ev": "v", "url": "https://www.scinote.net/", "group": "Biotech and mid-size labs"},
+   {"n": "SciSure (eLabNext)", "vendor": "SciSure", "note": "ELN with sample tracking and EHS after the eLabNext and SciShield merger.", "ev": "v", "url": "https://www.scisure.com/eln", "group": "Biotech and mid-size labs"},
+   {"n": "Labfolder", "vendor": "Labforward", "note": "ELN for life sciences, Berlin-based.", "ev": "v", "url": "https://www.labfolder.com/", "group": "Biotech and mid-size labs"},
+   {"n": "Labstep", "vendor": "Labstep", "note": "Lab workflow and ELN for academic and biotech teams.", "ev": "v", "url": "https://www.labstep.com/", "group": "Biotech and mid-size labs"},
+   {"n": "Scispot", "vendor": "Scispot", "note": "No-code lab operating platform with ELN for biotech startups.", "ev": "v", "url": "https://www.scispot.com/", "group": "Biotech and mid-size labs"},
+   {"n": "LabCollector", "vendor": "AgileBio", "note": "ELN with LIMS and inventory; cloud or self hosted.", "ev": "v", "url": "https://labcollector.com/", "group": "Biotech and mid-size labs"},
+   {"n": "Genemod", "vendor": "Genemod", "note": "Experiments, inventory and samples for biotech.", "ev": "v", "url": "https://genemod.net/", "group": "Biotech and mid-size labs"},
+   {"n": "Labii", "vendor": "Labii", "note": "Configurable ELN and LIMS for startups.", "ev": "v", "url": "https://www.labii.com/", "group": "Biotech and mid-size labs"},
+   {"n": "Uncountable", "vendor": "Uncountable", "note": "Experimental data and formulation R&D platform.", "ev": "v", "url": "https://www.uncountable.com/", "group": "Biotech and mid-size labs"},
+   {"n": "Colabra", "vendor": "Colabra", "note": "ELN built around shared projects for small groups.", "ev": "v", "url": "https://www.colabra.app/", "group": "Biotech and mid-size labs"},
+   {"n": "Lab Thread", "vendor": "Lab Thread", "note": "Unified lab platform, free for academia.", "ev": "l", "url": "https://labthread.com/", "group": "Biotech and mid-size labs"},
+   {"n": "IGOR", "vendor": "Wildfell Software", "note": "ELN and LIMS assistant for small labs.", "ev": "l", "url": "https://www.igorlabapp.com/", "group": "Biotech and mid-size labs"},
+   {"n": "CellPort", "vendor": "CellPort Software", "note": "ELN for cell biology and cell line work.", "ev": "l", "url": "https://www.cellportsoftware.com/", "group": "Biotech and mid-size labs"},
+   {"n": "CDD Vault", "vendor": "Collaborative Drug Discovery", "note": "Drug discovery database with ELN: registration, assay data and SAR.", "ev": "v", "url": "https://www.collaborativedrug.com/", "group": "Chemistry-focused"},
+   {"n": "Scilligence ELN", "vendor": "Scilligence", "note": "Chemistry and biology ELN for drug discovery.", "ev": "v", "url": "https://scilligence.com/scilligence-eln/", "group": "Chemistry-focused"},
+   {"n": "Arxspan ELN", "vendor": "Bruker", "note": "Chemistry-centred ELN for research.", "ev": "l", "url": "https://www.bruker.com/", "group": "Chemistry-focused"},
+   {"n": "Mbook", "vendor": "Mestrelab Research", "note": "Notebook for chemists with NMR and analytical data focus.", "ev": "v", "url": "https://mestrelab.com/software/mbook/", "group": "Chemistry-focused"},
+   {"n": "Chemia ELN", "vendor": "Chemiasoft", "note": "Chemistry ELN, India.", "ev": "l", "url": "https://chemiasoft.com/", "group": "Chemistry-focused"},
+   {"n": "ChemExplorer", "vendor": "Labio", "note": "Chemistry notebook, Czech Republic.", "ev": "l", "url": "https://chemexplorer.net/", "group": "Chemistry-focused"},
+   {"n": "eLabFTW", "vendor": "Open source", "note": "Open-source ELN (AGPL) from the Curie Institute community, common in academic labs.", "ev": "v", "url": "https://www.elabftw.net/", "group": "Open source and academic"},
+   {"n": "openBIS", "vendor": "ETH Zurich", "note": "Open-source research data and ELN platform with LIMS functions.", "ev": "v", "url": "https://openbis.ch/", "group": "Open source and academic"},
+   {"n": "Chemotion ELN", "vendor": "KIT and partners", "note": "Open-source chemistry ELN.", "ev": "v", "url": "https://chemotion.net/", "group": "Open source and academic"},
+   {"n": "RSpace", "vendor": "Research Space", "note": "Open-source-licensed ELN for research institutions.", "ev": "v", "url": "https://www.researchspace.com/", "group": "Open source and academic"},
+   {"n": "Kadi4Mat", "vendor": "Karlsruhe Institute of Technology", "note": "Open-source research data infrastructure with ELN.", "ev": "v", "url": "https://kadi.iam.kit.edu/", "group": "Open source and academic"},
+   {"n": "SciPeaks", "vendor": "Zakodium", "note": "Open-source ELN for analytical data.", "ev": "v", "url": "https://www.zakodium.com/products/scipeaks/", "group": "Open source and academic"},
+   {"n": "SampleDB", "vendor": "Forschungszentrum Julich", "note": "Open web ELN focused on sample and measurement metadata.", "ev": "l", "url": "https://eln-finder.ulb.tu-darmstadt.de/home", "group": "Open source and academic"},
+   {"n": "Herbie", "vendor": "Helmholtz-Zentrum Hereon", "note": "Semantic ELN built on ontologies.", "ev": "l", "url": "https://eln-finder.ulb.tu-darmstadt.de/home", "group": "Open source and academic"}
+  ]},
+ {key:'lims', name:'Laboratory information management system (LIMS)', dom:'lab', gxp:'GLP for tox and bioanalysis; GMP and Part 11 for QC, stability and release. Validated (CSV or CSA).',
+  what:'Samples, tests, specifications, stability studies and results. The record a batch is released on.',
+  v:[1,2,2,2,3,3,3,3],
+  products:[
+   {"n": "LabWare LIMS", "vendor": "LabWare", "note": "Enterprise LIMS for multi-site regulated QC; vendor names 21 of the top 25 pharma; Takeda and Novartis postings name LabWare.", "ev": "j", "url": "https://www.labware.com/industries/pharmaceutical", "group": "Enterprise pharma and QC"},
+   {"n": "LabVantage LIMS", "vendor": "LabVantage Solutions", "note": "Enterprise LIMS for pharma QC, R&D and biobanking; Lilly postings name LabVantage.", "ev": "j", "url": "https://www.labvantage.com/", "group": "Enterprise pharma and QC"},
+   {"n": "STARLIMS", "vendor": "STARLIMS (formerly Abbott Informatics)", "note": "End-to-end LIMS for pharma, biotech and public health; GSK manufacturing QC webinar on the vendor site.", "ev": "c", "url": "https://www.starlims.com/", "group": "Enterprise pharma and QC"},
+   {"n": "SampleManager LIMS", "vendor": "Thermo Fisher Scientific", "note": "Enterprise LIMS for process development, QC and manufacturing, linked to Chromeleon; Patheon case study.", "ev": "c", "url": "https://www.thermofisher.com/us/en/home/digital-solutions/lab-informatics/lims-pharma-biopharma-rd.html", "group": "Enterprise pharma and QC"},
+   {"n": "Nautilus LIMS", "vendor": "Thermo Fisher Scientific", "note": "Enterprise LIMS from the same vendor family.", "ev": "v", "url": "https://www.thermofisher.com/us/en/home/industrial/pharma-biopharma/lims/nautilus-lims.html", "group": "Enterprise pharma and QC"},
+   {"n": "Veeva LIMS", "vendor": "Veeva", "note": "Cloud QC LIMS linked to the vendor GMP quality applications.", "ev": "v", "url": "https://www.veeva.com/products/veeva-lims/", "group": "Enterprise pharma and QC"},
+   {"n": "Opcenter RD&L", "vendor": "Siemens", "note": "Formulation R&D and full-scale LIMS for QC, with ELN integration.", "ev": "v", "url": "https://www.siemens.com/en-us/products/opcenter/research-development-laboratory/", "group": "Enterprise pharma and QC"},
+   {"n": "BIOVIA ONE Lab and LIMS", "vendor": "Dassault Systemes", "note": "LIMS inside the unified BIOVIA lab platform.", "ev": "v", "url": "https://www.3ds.com/products/biovia/one-lab", "group": "Enterprise pharma and QC"},
+   {"n": "NuGenesis Lab Management System", "vendor": "Waters", "note": "Scientific data and lab management for analytical labs.", "ev": "v", "url": "https://www.waters.com/nextgen/us/en/products/informatics-and-software/nugenesis-lab-management-system.html", "group": "Enterprise pharma and QC"},
+   {"n": "Matrix Gemini", "vendor": "Autoscribe Informatics", "note": "Configurable LIMS for mid-sized regulated labs with Part 11 features.", "ev": "v", "url": "https://www.autoscribeinformatics.com/", "group": "Enterprise pharma and QC"},
+   {"n": "OpreX LIMS", "vendor": "Yokogawa", "note": "LIMS for manufacturing labs.", "ev": "v", "url": "https://www.yokogawa.com/solutions/products-platforms/control-system/smes/laboratory-information-management-system-lims-oprex-lims/", "group": "Enterprise pharma and QC"},
+   {"n": "Caliber LIMS", "vendor": "Caliber", "note": "LIMS used in pharma QC, India-based vendor.", "ev": "l", "url": "https://www.g2.com/categories/lims", "group": "Enterprise pharma and QC"},
+   {"n": "AmpleLogic LIMS", "vendor": "AmpleLogic", "note": "LIMS for pharma quality labs.", "ev": "l", "url": "https://www.g2.com/categories/lims", "group": "Enterprise pharma and QC"},
+   {"n": "Xybion LIMS", "vendor": "Xybion (Instem)", "note": "LIMS from a vendor now part of Instem.", "ev": "l", "url": "https://sourceforge.net/software/eln/", "group": "Enterprise pharma and QC"},
+   {"n": "Benchling", "vendor": "Benchling", "note": "LIMS functions (registry, inventory, workflows) in the Benchling platform.", "ev": "v", "url": "https://www.benchling.com/", "group": "Research and biotech"},
+   {"n": "Sapio LIMS", "vendor": "Sapio Sciences", "note": "No-code LIMS for biotech and pharma R&D.", "ev": "v", "url": "https://www.sapiosciences.com/lims", "group": "Research and biotech"},
+   {"n": "Core LIMS", "vendor": "Thermo Fisher Scientific", "note": "LIMS for research labs, biobanking and formulation.", "ev": "v", "url": "https://www.thermofisher.com/us/en/home/digital-solutions/lab-informatics/lims-pharma-biopharma-rd.html", "group": "Research and biotech"},
+   {"n": "Dotmatics", "vendor": "Dotmatics", "note": "Sample and inventory management inside the R&D platform.", "ev": "v", "url": "https://www.dotmatics.com/", "group": "Research and biotech"},
+   {"n": "SLIMS", "vendor": "Agilent", "note": "LIMS and ELN for research and core facilities.", "ev": "v", "url": "https://www.agilent.com/en/product/software-informatics/data-management-analysis/slims", "group": "Research and biotech"},
+   {"n": "L7 ESP", "vendor": "L7 Informatics", "note": "Lab orchestration platform with LIMS and ELN.", "ev": "l", "url": "https://www.l7informatics.com/", "group": "Research and biotech"},
+   {"n": "LabKey", "vendor": "LabKey", "note": "Biomedical research data platform with LIMS.", "ev": "v", "url": "https://www.labkey.com/", "group": "Research and biotech"},
+   {"n": "SciSure LIMS (eLabNext)", "vendor": "SciSure", "note": "Sample, workflow and inventory tracking.", "ev": "v", "url": "https://www.scisure.com/", "group": "Research and biotech"},
+   {"n": "LabCollector", "vendor": "AgileBio", "note": "LIMS and inventory for research labs.", "ev": "v", "url": "https://labcollector.com/", "group": "Research and biotech"},
+   {"n": "Labguru", "vendor": "Labguru (Cenevo)", "note": "Sample and inventory management with the ELN.", "ev": "v", "url": "https://www.labguru.com/", "group": "Research and biotech"},
+   {"n": "Genemod", "vendor": "Genemod", "note": "Inventory and sample management for biotech.", "ev": "v", "url": "https://genemod.net/", "group": "Research and biotech"},
+   {"n": "openBIS", "vendor": "ETH Zurich", "note": "Open-source LIMS and ELN platform.", "ev": "v", "url": "https://openbis.ch/", "group": "Research and biotech"},
+   {"n": "Watson LIMS", "vendor": "Thermo Fisher Scientific", "note": "Bioanalytical LIMS for preclinical and clinical PK; Part 11 and SEND or SDTM output.", "ev": "v", "url": "https://www.thermofisher.com/us/en/home/digital-solutions/lab-informatics/lab-information-management-systems-lims/solutions/watson.html", "group": "Specialist: bioanalysis, genomics, biobanking"},
+   {"n": "Clarity LIMS", "vendor": "Illumina", "note": "Genomics and NGS workflow LIMS.", "ev": "v", "url": "https://www.illumina.com/products/by-type/informatics-products/basespace-clarity-lims.html", "group": "Specialist: bioanalysis, genomics, biobanking"},
+   {"n": "GenoFAB", "vendor": "GenoFAB", "note": "Genomics LIMS.", "ev": "l", "url": "https://sourceforge.net/software/lims/", "group": "Specialist: bioanalysis, genomics, biobanking"},
+   {"n": "SampleTrack", "vendor": "Bruker", "note": "NMR sample tracking.", "ev": "v", "url": "https://www.bruker.com/en/products-and-solutions/mr/nmr-software/sampletrack.html", "group": "Specialist: bioanalysis, genomics, biobanking"},
+   {"n": "Freezerworks", "vendor": "Dataworks Development", "note": "Freezer and biobank sample management.", "ev": "l", "url": "https://www.g2.com/categories/lims", "group": "Specialist: bioanalysis, genomics, biobanking"},
+   {"n": "MBioLIMS Biobanking", "vendor": "Modul-Bio", "note": "Biobank LIMS.", "ev": "l", "url": "https://www.g2.com/categories/lims", "group": "Specialist: bioanalysis, genomics, biobanking"},
+   {"n": "QBench", "vendor": "QBench", "note": "Cloud LIMS for small and mid-sized labs with Part 11 features.", "ev": "v", "url": "https://qbench.com/", "group": "Smaller labs and cloud"},
+   {"n": "CloudLIMS", "vendor": "CloudLIMS", "note": "SaaS LIMS for small to mid labs with a Part 11 page.", "ev": "v", "url": "https://cloudlims.com/", "group": "Smaller labs and cloud"},
+   {"n": "Scispot", "vendor": "Scispot", "note": "Lab operating system with LIMS functions for startups.", "ev": "v", "url": "https://www.scispot.com/", "group": "Smaller labs and cloud"},
+   {"n": "Labii", "vendor": "Labii", "note": "Configurable ELN and LIMS for startups.", "ev": "v", "url": "https://www.labii.com/", "group": "Smaller labs and cloud"},
+   {"n": "eLab LIMS and webLIMS", "vendor": "LabLynx", "note": "LIMS and LIS products.", "ev": "v", "url": "https://www.lablynx.com/", "group": "Smaller labs and cloud"},
+   {"n": "Labbase and ReadyLIMS", "vendor": "Analytik Jena", "note": "LIMS for analytical labs and a packaged LIMS.", "ev": "v", "url": "https://www.analytik-jena.com/products/software/lims/", "group": "Smaller labs and cloud"},
+   {"n": "Labworks", "vendor": "Labworks", "note": "LIMS with mobile access.", "ev": "l", "url": "https://labworks.com/", "group": "Smaller labs and cloud"},
+   {"n": "AlisQI", "vendor": "AlisQI", "note": "Quality and lab data management.", "ev": "l", "url": "https://sourceforge.net/software/lims/", "group": "Smaller labs and cloud"},
+   {"n": "LABHQ LIMS", "vendor": "Broughton Software", "note": "LIMS for quality labs.", "ev": "l", "url": "https://www.g2.com/categories/lims", "group": "Smaller labs and cloud"}
+  ]},
+ {key:'cds', name:'Chromatography data system (CDS)', dom:'lab', gxp:'GMP and Part 11 in QC; GLP in bioanalysis. Audit trail review is an inspection focus.',
+  what:'Controls HPLC, UHPLC and GC instruments and processes the chromatograms behind most release and stability results.',
+  v:[1,2,2,2,3,3,3,3],
+  products:[
+   {n:'Empower', vendor:'Waters', note:'Genentech and Roche QC postings name Empower. Allotrope and TetraScience standardise Empower 3 data to the Allotrope Data Format.', ev:'j', url:'https://www.waters.com/nextgen/us/en/products/informatics-and-software.html'},
+   {n:'OpenLab CDS', vendor:'Agilent', note:'Part 11, Annex 11 and GAMP 5 claims; exports to the Allotrope Data Format.', ev:'v', url:'https://www.agilent.com/en/product/software-informatics/analytical-software-suite/chromatography-data-systems/openlab-cds'},
+   {n:'Chromeleon', vendor:'Thermo Fisher Scientific', note:'Paired with SampleManager LIMS on the vendor page.', ev:'v', url:'https://www.thermofisher.com/us/en/home/digital-solutions/lab-informatics/lims-pharma-biopharma-rd.html'}
+  ]},
+ {key:'sdms', name:'Scientific data management and lab connectivity', dom:'lab', gxp:'GxP when it archives raw data or feeds validated systems; vendors publish GxP packages.',
+  what:'Captures and standardises instrument output so it can be searched, trended and fed to models.',
+  v:[1,2,2,2,2,2,2,2],
+  products:[
+   {n:'NuGenesis SDMS', vendor:'Waters', note:'Automatic capture and archive of instrument data and documents.', ev:'v', url:'https://www.waters.com/nextgen/us/en/products/informatics-and-software/lms-and-data-management/nugenesis-software/nugenesis-sdms.html'},
+   {n:'Tetra Scientific Data and AI Cloud', vendor:'TetraScience', note:'Takeda, Bayer and Organon testimonials on the vendor site; a GxP solution brief.', ev:'c', url:'https://www.tetrascience.com/'},
+   {n:'Scitara DLX', vendor:'Scitara', note:'Connects instruments, LIMS, ELN and CDS.', ev:'v', url:'https://www.scitara.com/'},
+   {n:'Allotrope Data Format', vendor:'Allotrope Foundation', note:'Member companies include Amgen, Bayer, Boehringer Ingelheim, Genentech, GSK, J&J and Merck; vendor partners include Agilent, Waters, Thermo Fisher and Benchling.', ev:'s', url:'https://allotropefoundation.org/about-us/'},
+   {n:'SiLA 2', vendor:'SiLA Consortium', note:'Open instrument communication standard; Novartis, Roche and J&J shown as members.', ev:'s', url:'https://sila-standard.com/'}
+  ]},
+ {key:'preclin', name:'Nonclinical study management, SEND, PK and PBPK', dom:'nonclin', gxp:'GLP for study data (21 CFR Part 58); SEND datasets are required in FDA submissions.',
+  what:'Runs toxicology studies end to end and models exposure: toxicokinetics, PK and PD, physiologically based absorption.',
+  v:[1,3,1,1,1,1,0,0],
+  products:[
+   {n:'Provantis', vendor:'Instem', note:'GLP study management with SEND output; Charles River and NIEHS named.', ev:'c', url:'https://www.instem.com/solutions/study-management/provantis/'},
+   {n:'Pristima', vendor:'Instem (formerly Xybion)', note:'Web-based preclinical platform with pathology and SEND.', ev:'v', url:'https://www.instem.com/solutions/study-management/pristima/'},
+   {n:'Phoenix WinNonlin', vendor:'Certara', note:'NCA and PK/PD; vendor says 11 regulators and 1,500 companies use it.', ev:'v', url:'https://www.certara.com/software/phoenix-winnonlin/'},
+   {n:'GastroPlus', vendor:'Simulations Plus', note:'PBPK and PBBM modelling used from discovery to biowaiver arguments.', ev:'v', url:'https://www.simulations-plus.com/software/gastroplus/'}
+  ]},
+ {key:'clin', name:'Clinical trial systems: EDC, CTMS, eTMF, IRT, eCOA', dom:'clin', gxp:'GCP (ICH E6(R3)); Part 11 for electronic records and signatures; sponsor oversight of vendors.',
+  what:'Collects trial data, runs the study, randomises and ships drug, and keeps the trial master file inspection ready.',
+  v:[0,0,3,3,3,2,1,2],
+  products:[
+   {n:'Rave EDC and Patient Cloud', vendor:'Medidata (Dassault Systemes)', note:'Vendor cites 38,000 plus studies; a Pfizer data reviewer posting names Rave as an example system.', ev:'j', url:'https://www.medidata.com/en/clinical-trial-products/clinical-data-management/edc-systems/'},
+   {n:'Vault EDC, CTMS and eTMF', vendor:'Veeva', note:'GSK, Boehringer Ingelheim, UCB and Vertex named for EDC; Sanofi and AstraZeneca postings name Vault.', ev:'j', url:'https://www.veeva.com/products/clinical-data-management/'},
+   {n:'Clinical One', vendor:'Oracle', note:'Unified data collection and RTSM.', ev:'v', url:'https://www.oracle.com/life-sciences/clinical-trials/data-collection/'},
+   {n:'Suvoda IRT', vendor:'Suvoda', note:'Randomisation and supply; a Leader in the Everest Group RTSM PEAK Matrix (Dec 2025).', ev:'t', url:'https://www.suvoda.com/rtsm-irt-clinical-trial'},
+   {n:'Prancer RTSM', vendor:'4G Clinical', note:'Randomisation and supply forecasting.', ev:'v', url:'https://www.4gclinical.com/prancer-rtsm'},
+   {n:'SmartSignals', vendor:'Signant Health', note:'EDC, eCOA, eConsent and RTSM on one platform.', ev:'v', url:'https://signanthealth.com/solutions/unified-eclinical-platform'},
+   {n:'Clario endpoint technology', vendor:'Clario', note:'eCOA, cardiac, imaging and respiratory endpoints; vendor says it supported 70 percent of FDA and EMA approvals since 2015.', ev:'v', url:'https://clario.com/'}
+  ]},
+ {key:'stats', name:'Biostatistics, CDISC and submission datasets', dom:'clin', gxp:'GCP; validated statistical computing environments; CDISC SDTM and ADaM are required by FDA and PMDA.',
+  what:'Analysis programming, dataset standards and the define.xml that regulators review.',
+  v:[0,1,2,2,3,3,0,1],
+  products:[
+   {n:'SAS Life Science Analytics Framework', vendor:'SAS', note:'AstraZeneca and Chiesi named on the vendor page.', ev:'c', url:'https://www.sas.com/en_us/industry/life-sciences/solution/clinical-research-analytics.html'},
+   {n:'Posit (R and Python)', vendor:'Posit', note:'Roche, Pfizer, GSK and Novo Nordisk named; Posit says Novo Nordisk made the first FDA-accepted R-based submission.', ev:'c', url:'https://posit.co/solutions/pharma'},
+   {n:'Pinnacle 21 Enterprise', vendor:'Certara', note:'CDISC validation and define.xml; FDA renewed Pinnacle 21 as its DataFit provider.', ev:'t', url:'https://www.certara.com/fact-sheet/pinnacle-21-enterprise-dataset-validation-submission-readiness/'}
+  ]},
+ {key:'safety', name:'Safety database and signal detection', dom:'safe', gxp:'GVP; ICH E2B(R3) electronic case reporting; Part 11.',
+  what:'Case intake, medical coding, expedited and periodic reports, signal detection.',
+  v:[0,0,1,2,2,2,2,3],
+  products:[
+   {n:'Argus Safety', vendor:'Oracle', note:'QPS and LSK Global named in 2025 and 2026 announcements; an AstraZeneca consultant posting names Argus.', ev:'j', url:'https://www.oracle.com/life-sciences/pharmacovigilance/'},
+   {n:'Veeva Safety', vendor:'Veeva', note:'Merck, UCB and LEO Pharma named as customers.', ev:'c', url:'https://www.veeva.com/products/veeva-safety/'},
+   {n:'LifeSphere Safety', vendor:'ArisGlobal', note:'Astellas, Roche, Boehringer Ingelheim and AstraZeneca named.', ev:'c', url:'https://www.arisglobal.com/lifesphere/safety/'},
+   {n:'PV Suite', vendor:'Ennov', note:'Case management, signal detection and RMP tracking.', ev:'v', url:'https://en.ennov.com/solutions/pharmacovigilance/'}
+  ]},
+ {key:'rim', name:'Regulatory information management and eCTD publishing', dom:'reg', gxp:'Not a GxP regime of its own; the content is inspected. eCTD format mandated by FDA and EMA; eCTD v4.0 arriving.',
+  what:'Registrations, submission planning, publishing, health authority correspondence and the archive.',
+  v:[0,1,1,1,2,3,2,3],
+  products:[
+   {n:'Vault RIM', vendor:'Veeva', note:'Veeva press release: 350 plus companies and 15 of the top 20 pharma (2022). Bayer regulatory posting names Vault RIM.', ev:'j', url:'https://www.veeva.com/products/veeva-rim/'},
+   {n:'docuBridge', vendor:'Lorenz', note:'eCTD, NeeS and eCTD v4.0 publishing.', ev:'v', url:'https://www.lorenz.cc/solutions/docubridge/'},
+   {n:'GlobalSubmit', vendor:'Certara', note:'Publishing, validation and review for nine health authorities.', ev:'v', url:'https://www.certara.com/globalsubmit-ectd-submission-software/'},
+   {n:'SmartSolve RIM', vendor:'IQVIA', note:'AI-enabled RIM, strongest in medical devices.', ev:'v', url:'https://www.iqvia.com/library/fact-sheets/iqvia-smartsolve-rim'},
+   {n:'IDMP Ontology', vendor:'Pistoia Alliance', note:'Implementation layer for ISO IDMP; Bayer, Novartis, GSK, Roche, AstraZeneca and others listed as participants.', ev:'s', url:'https://pistoiaalliance.org/news/press-release-pistoia-alliance-launches-idmp-1-0/'}
+  ]},
+ {key:'qms', name:'Quality management, document control and training', dom:'qual', gxp:'GMP, GCP and GLP quality systems; Part 11 and Annex 11; the system of record for deviations, CAPA and change control.',
+  what:'Deviations, CAPA, change control, audits, controlled documents and training records.',
+  v:[0,1,2,2,3,3,3,3],
+  products:[
+   {n:'Quality Cloud (QMS, QualityDocs, Training)', vendor:'Veeva', note:'Gilead, GSK, Moderna and Sanofi named; BMS postings name Veeva QMS alongside TrackWise.', ev:'j', url:'https://www.veeva.com/products/quality-cloud/'},
+   {n:'TrackWise Digital', vendor:'Sparta Systems (Honeywell)', note:'Daiichi Sankyo and Eisai named; BMS quality postings name TrackWise.', ev:'j', url:'https://www.spartasystems.com/trackwise/'},
+   {n:'MasterControl Quality Excellence', vendor:'MasterControl', note:'Vendor: 1,100 plus customers; Dendreon and Fagron named.', ev:'c', url:'https://www.mastercontrol.com/quality/'},
+   {n:'ETQ Reliance', vendor:'ETQ', note:'J&J and Huvepharma named on the life sciences page.', ev:'c', url:'https://www.etq.com/solution-industry-lifescience-pharmaceutical/'},
+   {n:'Dot Compliance', vendor:'Dot Compliance', note:'Salesforce-native eQMS for life sciences.', ev:'v', url:'https://www.dotcompliance.com/'},
+   {n:'ComplianceWire', vendor:'UL Solutions', note:'GxP training LMS with Part 11 claims.', ev:'v', url:'https://www.ul.com/software/ultrus/compliancewire-lms'}
+  ]},
+ {key:'val', name:'Validation and computer software assurance tooling', dom:'qual', gxp:'GAMP 5 second edition (ISPE, 2022) and FDA computer software assurance guidance (final September 2025).',
+  what:'Paperless protocols, execution and traceability for equipment, facilities and computerised systems.',
+  v:[0,1,1,1,2,2,2,2],
+  products:[
+   {n:'Kneat Gx', vendor:'Kneat', note:'MSD, Pfizer, Novartis, Biogen and Takeda named on the vendor page.', ev:'c', url:'https://kneat.com/solution/'},
+   {n:'iVal and VLMS', vendor:'ValGenesis', note:'Bayer, Roche and Catalent named; Roche QC posting names ValGenesis.', ev:'j', url:'https://www.valgenesis.com/application/ival'},
+   {n:'GAMP 5 Guide, 2nd edition', vendor:'ISPE', note:'The framework most validation plans cite; July 2022.', ev:'s', url:'https://ispe.org/publications/guidance-documents/gamp-5-guide-2nd-edition'},
+   {n:'Computer Software Assurance guidance', vendor:'FDA', note:'Final guidance 24 September 2025 for production and quality system software; written for devices, applied by analogy in pharma.', ev:'s', url:'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/computer-software-assurance-production-and-quality-management-system-software'}
+  ]},
+ {key:'mes', name:'Manufacturing execution, batch records and environmental monitoring', dom:'mfg', gxp:'GMP; Part 11 and Annex 11; Annex 1 for sterile environmental monitoring.',
+  what:'Electronic batch records, weigh and dispense, review by exception, cleanroom monitoring.',
+  v:[0,1,1,2,3,3,3,3],
+  products:[
+   {n:'PAS-X MES', vendor:'Korber (Werum)', note:'AstraZeneca, Novo Nordisk and Amgen named; Sanofi posting for a PAS-X configuration expert.', ev:'j', url:'https://www.koerber.com/en/solutions/software-and-ai/life-sciences-mes'},
+   {n:'Opcenter Execution Pharma', vendor:'Siemens', note:'Paperless manufacturing and electronic batch records.', ev:'v', url:'https://www.siemens.com/en-us/products/opcenter/execution/pharma/'},
+   {n:'FactoryTalk PharmaSuite', vendor:'Rockwell Automation', note:'Rottendorf Pharma named.', ev:'c', url:'https://www.rockwellautomation.com/en-us/products/software/factorytalk/operationsuite/mes/life-sciences.html'},
+   {n:'DeltaV MES (Syncade)', vendor:'Emerson', note:'MES for regulated industries.', ev:'v', url:'https://www.emerson.com/en/automation-systems/operations-business-management/deltav-mes'},
+   {n:'Apprentice and Tulip', vendor:'Apprentice; Tulip', note:'Newer composable batch record platforms; Tulip names Organon and Eli Lilly.', ev:'c', url:'https://tulip.co/traceability-and-compliance/electronic-batch-records/'},
+   {n:'Novatek Environmental Monitoring', vendor:'Novatek International', note:'Pfizer, Takeda, Sanofi and Amgen named.', ev:'c', url:'https://ntint.com/product/novatek-environmental-monitoring/'},
+   {n:'MODA-EM', vendor:'Lonza', note:'Paperless environmental monitoring; Takeda postings pair MODA with LIMS.', ev:'j', url:'https://www7.lonza.com/products-services/pharma-biotech/informatics/moda-paperless-qc-micro-solution/moda-em-paperless-environmental-monitoring.aspx'}
+  ]},
+ {key:'erp', name:'ERP, serialisation and supply chain', dom:'mfg', gxp:'GMP for batch disposition; GDP; US DSCSA and EU FMD serialisation.',
+  what:'Materials, batch status and release, serial numbers and track and trace to the pharmacy.',
+  v:[0,0,0,1,2,2,3,3],
+  products:[
+   {n:'S/4HANA, Batch Release Hub and ATTP', vendor:'SAP', note:'ERP with batch management, release automation and serial number management.', ev:'v', url:'https://www.sap.com/products/scm/batch-release-hub.html'},
+   {n:'Opus', vendor:'TraceLink', note:'Vendor: 500 plus customers and 246,000 trading partners (vendor claim).', ev:'v', url:'https://www.tracelink.com/'},
+   {n:'rfxcel', vendor:'Antares Vision Group', note:'Serialisation, track and trace and environmental monitoring.', ev:'v', url:'https://rfxcel.com/'}
+  ]},
+ {key:'crm', name:'Commercial CRM, medical and patient services', dom:'mfg', gxp:'Not GxP; promotional and privacy rules apply, with GVP for adverse events reported through call centres.',
+  what:'Field engagement, medical information, patient support programmes.',
+  v:[0,0,0,0,1,1,3,3],
+  products:[
+   {n:'Vault CRM', vendor:'Veeva', note:'Amgen, Bayer, BMS, Eli Lilly, GSK and Merck listed as adopters; a Genentech product manager posting names it.', ev:'j', url:'https://www.veeva.com/'},
+   {n:'Life Sciences Cloud', vendor:'Salesforce', note:'Takeda, Pfizer, Sanofi, Novartis and AstraZeneca named.', ev:'c', url:'https://www.salesforce.com/life-sciences/cloud/'}
+  ]},
+ {key:'data', name:'Data platforms, analytics and AI', dom:'data', gxp:'GxP only where validated decisions depend on it; most warehouses sit outside the validation boundary and hold qualified copies.',
+  what:'Lakehouse and warehouse platforms, governance, models and AI assistants across R&D, quality and manufacturing.',
+  v:[2,2,2,2,2,2,2,2],
+  products:[
+   {n:'Vault Platform', vendor:'Veeva', note:'Shared platform under 50 plus applications; IQ and OQ packages each release.', ev:'v', url:'https://www.veeva.com/products/vault-platform/'},
+   {n:'Databricks for healthcare and life sciences', vendor:'Databricks', note:'Lakehouse with Unity Catalog governance.', ev:'v', url:'https://www.databricks.com/solutions/industries/healthcare-and-life-sciences'},
+   {n:'AI Data Cloud for life sciences', vendor:'Snowflake', note:'Pfizer, Sanofi and Chugai named.', ev:'c', url:'https://www.snowflake.com/en/solutions/industries/healthcare-and-life-sciences/life-sciences/'},
+   {n:'Foundry', vendor:'Palantir', note:'Data integration across the value chain.', ev:'v', url:'https://www.palantir.com/offerings/life-sciences/'},
+   {n:'Lab of the Future survey 2025', vendor:'Pistoia Alliance', note:'206 respondents: cloud data platforms used by 80 percent, 77 percent expect to use AI within two years, data silos the top challenge at 57 percent.', ev:'s', url:'https://pistoiaalliance.org/resource-library/lab-of-the-future-2025/'}
+  ]}
+];
+
+</script>
+<script>
 /* ===================== STORY MODE + ATTRITION FUNNEL ===================== */
 const STORY_STEPS = ['disc','pre','p1','p2','p3','sub','app','post'];
 const RISK = {
@@ -1163,7 +1470,7 @@ const EXAMPLE_STORY = [
   post:'A second manufacturing site via comparability and a Type II variation; new indications through supplemental BLAs; biosimilars after twelve years of US exclusivity.'},
  {disc:'The receptor and lentiviral construct are designed and a T cell manufacturing concept chosen; the potency concept is defined early because the process is the product.',
   pre:'In vitro potency and specificity, mouse xenograft efficacy, biodistribution and persistence, replication-competent lentivirus testing; a GMP vector lot from a specialist CDMO; the IND goes to CBER.',
-  p1:'A seamless Phase 1/2 in relapsed patients at a few academic centres; each patient\'s cells are shipped, processed over about two weeks, cryopreserved and returned; CRS management is built into the protocol.',
+  p1:'A combined Phase 1/2 in relapsed patients at a few academic centres; each patient\'s cells are shipped, processed over about two weeks, cryopreserved and returned; CRS management is built into the protocol.',
   p2:'A single-arm pivotal cohort with response rate as the endpoint; the process moves from open manual steps to a closed automated platform, with a comparability study on limited material.',
   p3:'No separate Phase 3: the quantitative potency assay is validated before pivotal batches, chain of identity and custody are validated, and the commercial facility is qualified for scale-out.',
   sub:'BLA with RMAT designation and accelerated approval; EU conditional marketing authorisation assessed by CAT; manufacturing and comparability dominate the review questions.',
@@ -1511,6 +1818,94 @@ resize(); build0(); requestAnimationFrame(frame);
 
 </script>
 <script>
+/* ===================== SOFTWARE GRID (home section) ===================== */
+const TINT_HEX = {'var(--t-olive)':'#8e8a25','var(--t-sage)':'#b3bd95','var(--t-salmon)':'#d77a7a','var(--t-peach)':'#e6915d','var(--t-lime)':'#c0d4a7','var(--t-sky)':'#9ab6c8','var(--t-steel)':'#a5b8c0','var(--t-peri)':'#8c9ae0'};
+const STAGE_LBL = {disc:'Discovery', pre:'Preclinical', p1:'Phase 1', p2:'Phase 2', p3:'Phase 3', sub:'Submission', app:'Approval and launch', post:'Post-market'};
+const STAGE_SHORT = {disc:'Discovery', pre:'Preclinical', p1:'Phase 1', p2:'Phase 2', p3:'Phase 3', sub:'Submission', app:'Launch', post:'Post-market'};
+const LEVEL = ['not used', 'supporting', 'active', 'central'];
+
+window.initSwMap = function(api){
+  const { navigate, showPopHtml, hidePop, esc, STAGE_SUM } = api;
+  const $ = s => document.querySelector(s);
+  const grid = $('#swGrid'), panel = $('#swPanel'), keyBox = $('#swKey');
+  if(!grid) return;
+  let sel = null;
+  const meterRow = v => `<span class="sw-meter">${v.map((x,i)=>`<i class="m${x}" title="${esc(STAGES[i].name)}: ${LEVEL[x]}"></i>`).join('')}</span>`;
+
+  const li = p => `<li><span class="sw-n"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.n)}</a> <span class="muted">${esc(p.vendor)}</span></span><span class="sw-note">${esc(p.note)}</span></li>`;
+  function productList(c){
+    const groups = [...new Set(c.products.map(p=>p.group).filter(Boolean))];
+    if(!groups.length) return `<ul class="sw-list">${c.products.map(li).join('')}</ul>`;
+    return groups.map(g=>`<h3 class="k4 sw-group">${esc(g)} <span class="muted" style="font-weight:400">(${c.products.filter(p=>p.group===g).length})</span></h3><ul class="sw-list">${c.products.filter(p=>p.group===g).map(li).join('')}</ul>`).join('');
+  }
+  function renderGrid(){
+    const head = `<thead><tr><th class="rowh" scope="col">System category</th>${STAGES.map(s=>`<th scope="col"><i style="background:${TINT_HEX[s.color]}"></i>${esc(STAGE_SHORT[s.id])}</th>`).join('')}</tr></thead>`;
+    const body = `<tbody>${SOFTWARE.map(c=>`<tr data-cat="${c.key}" class="${sel&&sel.cat===c.key?' on':''}"><th class="rowh" scope="row"><button type="button" data-cat="${c.key}"><i class="sw" style="background:${SW_DOMAINS[c.dom].hex}"></i><span>${esc(c.name)}</span></button></th>${c.v.map((v,i)=>`<td><b class="m${v}" data-cat="${c.key}" data-stage="${STAGES[i].id}" style="${v?'background:'+SW_DOMAINS[c.dom].hex:''}" title="${esc(LEVEL[v])}"></b></td>`).join('')}</tr>`).join('')}</tbody>`;
+    const foot = `<tfoot><tr><td colspan="9"><span class="approx">illustrative</span> How central a category is at each stage is a judgement from the sources, not a measurement. Products in the panel are examples seen in the research, not endorsements.</td></tr></tfoot>`;
+    grid.innerHTML = head + body + foot;
+    grid.querySelectorAll('th.rowh button').forEach(b=>b.addEventListener('click', ()=>select({cat:b.dataset.cat})));
+    grid.querySelectorAll('td b').forEach(b=>{
+      if(b.classList.contains('m0')) return;
+      b.addEventListener('mouseenter', ()=>{ b.classList.add('hot'); popFor(b); });
+      b.addEventListener('mouseleave', ()=>{ b.classList.remove('hot'); hidePop(); });
+      b.addEventListener('click', ()=>{ hidePop(); select({cat:b.dataset.cat, stage:b.dataset.stage}); });
+    });
+    grid.querySelectorAll('thead th:not(.rowh)').forEach((th,i)=>{ th.style.cursor='pointer'; th.title='Everything in use at '+STAGES[i].name; th.addEventListener('click', ()=>select({stage:STAGES[i].id})); });
+  }
+  function popFor(b){
+    const c = SOFTWARE.find(c=>c.key===b.dataset.cat), i = STAGES.findIndex(s=>s.id===b.dataset.stage), v = c.v[i];
+    const r = b.getBoundingClientRect();
+    const top = c.products.slice(0,3).map(p=>esc(p.n)).join(', ');
+    showPopHtml({left:r.left, right:r.right, top:r.top, bottom:r.bottom, width:r.width, height:r.height, above:true},
+      `<b>${esc(c.name)}</b><span class="k">${esc(STAGES[i].name)}: ${LEVEL[v]} at this stage</span><p style="margin:6px 0 0;font-size:13px">${esc(c.what)}</p><p style="margin:8px 0 0;font-size:12.5px">Examples: ${top}</p><div class="go">Click for products and sources</div>`);
+  }
+  function renderKey(){
+    const sample = SW_DOMAINS.lab.hex;
+    keyBox.innerHTML = `<div class="sw-legend"><span class="lbl">How to read a square</span>
+      <span class="sw-lg"><b class="m0"></b>not used at this stage</span>
+      <span class="sw-lg"><b class="m1" style="background:${sample}"></b>supporting</span>
+      <span class="sw-lg"><b class="m2" style="background:${sample}"></b>active</span>
+      <span class="sw-lg"><b class="m3" style="background:${sample}"></b>central</span></div>
+      <div class="sw-legend"><span class="lbl">Colour is the area</span>${Object.values(SW_DOMAINS).map(d=>`<span class="sw-lg"><i class="sw" style="background:${d.hex}"></i>${esc(d.name)}</span>`).join('')}</div>`;
+  }
+  function renderPanel(){
+    if(!sel){ panel.hidden = true; return; }
+    panel.hidden = false;
+    let h = '';
+    if(sel.cat){
+      const c = SOFTWARE.find(c=>c.key===sel.cat);
+      const stageNote = sel.stage ? ` <span class="muted" style="font-weight:500">at ${esc(STAGE_LBL[sel.stage])}: ${LEVEL[c.v[STAGES.findIndex(s=>s.id===sel.stage)]]}</span>` : '';
+      h = `<div class="swp-head"><span class="swp-num" style="background:${SW_DOMAINS[c.dom].hex}">&nbsp;</span><div><h3>${esc(c.name)}${stageNote}</h3><p class="muted">${esc(c.what)}</p></div></div>
+      <div class="swp-grid">
+        <div><h3 class="k4">Where it matters</h3><p>${meterRow(c.v)}</p><p class="muted" style="font-size:13px">Discovery to Post-market, left to right. Darker means more central.</p><h3 class="k4" style="margin-top:10px">Rules that apply</h3><p>${esc(c.gxp)}</p></div>
+        <div class="span2"><h3 class="k4">${c.products.length} products seen in the sources <span class="approx">examples, not endorsements</span></h3>
+          ${productList(c)}</div>
+      </div>
+      <div class="swp-actions"><button class="btn" data-clear>Close</button><button class="btn" data-open="systems">Open the lab informatics page &rarr;</button></div>`;
+    }else{
+      const i = STAGES.findIndex(s=>s.id===sel.stage), s = STAGES[i];
+      const cats = SOFTWARE.map(c=>({c, v:c.v[i]})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
+      h = `<div class="swp-head"><span class="swp-num" style="background:${TINT_HEX[s.color]}">${i+1}</span><div><h3>Software at ${esc(s.name)}</h3><p class="muted">${esc(STAGE_SUM[s.id])}</p></div></div>
+      <ul class="sw-list">${cats.map(({c,v})=>`<li><span class="sw-n"><button class="tag link" data-cat="${c.key}"><i class="sw" style="background:${SW_DOMAINS[c.dom].hex}"></i>${esc(c.name)}</button> <span class="muted">${LEVEL[v]}</span></span><span class="sw-note">${c.products.slice(0,4).map(p=>esc(p.n)).join(', ')}</span></li>`).join('')}</ul>
+      <div class="swp-actions"><button class="btn" data-clear>Close</button><button class="btn" data-open="stage-${s.id}">Open the ${esc(s.name)} page &rarr;</button></div>`;
+    }
+    panel.innerHTML = h;
+    if(window.wrapTerms) window.wrapTerms(panel);
+    panel.querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>select({cat:b.dataset.cat})));
+    panel.querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>select(null)));
+    panel.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.open, b)));
+  }
+  function select(s){
+    sel = s; hidePop();
+    grid.querySelectorAll('tbody tr').forEach(tr=>tr.classList.toggle('on', !!s && s.cat===tr.dataset.cat));
+    renderPanel();
+    if(s){ const r = panel.getBoundingClientRect(); if(r.bottom>innerHeight||r.top<80) panel.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  }
+  renderKey(); renderGrid();
+};
+
+</script>
+<script>
 /* ===================== RENDER, NAVIGATION AND INTERACTION ===================== */
 (function(){
 const $ = (s, r=document) => r.querySelector(s);
@@ -1574,7 +1969,7 @@ const MOD_NOTE = {
  all:'Select a modality to see how each stage, its GxP expectations and its deliverables change. Peptides and oligonucleotides mostly follow the small-molecule pattern; mRNA and vaccines mostly follow the biologic pattern.',
  sm:'Small-molecule view: NDA route, two-species toxicology, oral formulation science, fully characterisable molecule, generic competition after exclusivity.',
  bio:'Biologic view: BLA route, one relevant species is often sufficient, cell banks and comparability dominate CMC, cold chain, biosimilar competition after exclusivity.',
- cgt:'Cell and gene therapy view: CBER and CAT review, seamless Phase 1/2 and single pivotal studies, the process is the product, potency and chain of identity, long-term follow-up.'
+ cgt:'Cell and gene therapy view: CBER and CAT review, combined Phase 1/2 and single pivotal studies, the process is the product, potency and chain of identity, long-term follow-up.'
 };
 let mod = 'all';
 let current = 'home';
@@ -1635,7 +2030,7 @@ function renderStages(){
 
 function renderClinical(){
   const ph = ['p1','p2','p3'].map((id,i)=>{ const s=STAGES.find(x=>x.id===id); return `<button class="phase-tile" type="button" data-nav="stage-${id}"><span class="n" style="background:${s.color}">${i+1}</span><b>${s.name} <span style="font-weight:600;color:var(--muted);font-size:14px">${esc(s.short)}</span></b><span>${esc(STAGE_SUM[id])}</span><span>Typical duration: <b style="font-size:13.5px;color:var(--ink)">${esc(s.dur.all)}</b> <span class="approx">approx.</span></span><span class="go">Open the ${s.name} page &rarr;</span></button>`; }).join('');
-  $('#clinicalBody').innerHTML = `<div class="card"><p>Clinical development is one stage on the map but three distinct phases in practice, each with its own purpose, population, gate and CMC expectations. Phase 1 asks whether the drug is safe enough to keep going and how the body handles it. Phase 2 asks whether it works and at which dose. Phase 3 confirms that answer at the scale a label and a price need. Programmes in oncology and rare disease often run seamless Phase 1/2 or single pivotal designs, so the boundaries blur; the questions do not.</p>
+  $('#clinicalBody').innerHTML = `<div class="card"><p>Clinical development is one stage on the map but three distinct phases in practice, each with its own purpose, population, gate and CMC expectations. Phase 1 asks whether the drug is safe enough to keep going and how the body handles it. Phase 2 asks whether it works and at which dose. Phase 3 confirms that answer at the scale a label and a price need. Programmes in oncology and rare disease often run combined Phase 1/2 or single pivotal designs, so the boundaries blur; the questions do not.</p>
   <div class="phase-tiles">${ph}</div></div>
   <div class="card"><h3>What runs across all three phases</h3><div class="grid g3">
     <div><h3 class="k4">Rules</h3><p>GCP (ICH E6(R3)) for every trial; GMP for the investigational product, rising from phase-appropriate to commercial standard by Phase 3; expedited safety reporting of SUSARs; annual DSURs.</p></div>
@@ -1685,7 +2080,7 @@ function renderLanes(){
   let h = '<div class="hd">Function</div>' + LANE_STAGES.map(s=>`<div class="hd">${s}</div>`).join('');
   LANES.forEach((l,li)=>{
     h += `<div class="fn" style="grid-column:1">${l.highlight?'<span class="dot" style="background:var(--teal)"></span>':''}${l.name}</div>`;
-    l.cells.forEach((c,ci)=>{ h += `<div class="cell l${c[0]}" data-l="${li}" data-c="${ci}" data-pop="lane" style="grid-column:${ci+2}">${c[1]||'<span class="muted">&middot;</span>'}</div>`; });
+    l.cells.forEach((c,ci)=>{ h += `<div class="cell l${c[0]}" data-l="${li}" data-c="${ci}" data-pop="lane" style="grid-column:${ci+2}">${c[1]||''}</div>`; });
   });
   const g = $('#lanesGrid'); g.innerHTML = h;
   const an = LANES.findIndex(l=>l.highlight);
@@ -1777,9 +2172,10 @@ function renderGxp(){
   $('#gxpBody').innerHTML = map + regimes + csv + ich;
 }
 function renderSystems(){
-  $('#systemsBody').innerHTML = `<div class="card"><p class="muted" style="font-size:14px">The systems lane in the swimlanes shows when each arrives. This list says what each does and what validation it attracts.</p><div class="stagger">` +
+  $('#systemsBody').innerHTML = `<div class="card"><p class="muted" style="font-size:14px">The systems lane in the swimlanes shows when each arrives. This list says what each does and what validation it attracts. For named products and sources by stage, see <a href="#home" data-goto-software>the software grid on the home page</a>.</p><div class="stagger">` +
     SYSTEMS.map((s,i)=>col(s.name, `<p style="margin:6px 0"><span class="tag sys">Where: ${esc(s.where)}</span></p><p style="margin:0 0 6px"><b>GxP status:</b> ${s.gxp}</p><p style="margin:0">${s.body}</p>`, {inner:true, id:'sys-'+i})).join('') + `</div></div>`;
 }
+document.addEventListener('click', e=>{ const a=e.target.closest('[data-goto-software]'); if(!a) return; e.preventDefault(); navigate('home', a); setTimeout(()=>{ const el=document.getElementById('software'); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); }, 450); });
 function renderGlossary(){
   $('#glossaryBody').innerHTML = Object.keys(GLOSSARY).sort((a,b)=>a.localeCompare(b)).map(k=>`<div class="gl-row"><b>${esc(k)}</b>: ${esc(GLOSSARY[k])}</div>`).join('');
 }
@@ -2100,6 +2496,7 @@ applyState(initialState);
 window.wrapTerms = wrapTerms;
 if(window.initGraph) window.initGraph({STAGE_SUM, HUB, ICONS, navigate, showPopHtml, hidePop, esc, modRef:()=>mod, durShort});
 if(window.initStory) window.initStory({navigate, esc, STAGE_SUM, setStoryStage:(i)=>window.setStoryStage&&window.setStoryStage(i), onChange:()=>syncHash(false)});
+if(window.initSwMap) window.initSwMap({navigate, showPopHtml, hidePop, esc, STAGE_SUM});
 if(window.storyApi && current==='home' && (initialState.molecule || initialState.step!=null)) window.storyApi.set(initialState.molecule, initialState.step);
 hashReady = true; syncHash(false); countView(current);
 })();
