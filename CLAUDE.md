@@ -16,3 +16,7 @@ Single-file static site. `index.html` contains everything (inline CSS, JS, fonts
 - Visits are counted with GoatCounter (dashboard: https://pharmapipelinemap.goatcounter.com). Cookieless, so no consent banner is needed.
 - The counter is inline code in `index.html` (search for `GoatCounter`) that calls the `/count` endpoint directly. No external script is loaded, which keeps the self-contained rule.
 - It counts only on `khanahmadharis.github.io`, never on local test servers. Each page (stage pages, swimlanes and so on) counts as its own view; role filter and Follow a molecule choices are counted as events.
+
+## Look
+- Warm, light retro style shared with the campus explorer: cream page, dark brown ink, burnt orange, amber and muted teal, purple and olive. Type is Zilla Slab, with the pixel faces (Press Start 2P, VT323) for the brand and small figures only. All fonts are embedded as data URIs.
+- The retro overrides sit at the end of the style block, under the comment "warm retro look".
