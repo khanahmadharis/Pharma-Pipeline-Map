@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pharma Pipeline Map</title>
+<title>How drugs are made?</title>
 <meta property="og:type" content="website">
-<meta property="og:title" content="Pharma Pipeline Map">
+<meta property="og:title" content="How drugs are made?">
 <meta property="og:description" content="An interactive map of how a drug goes from idea to market: stages, functions, GxP, modality, dosage form and the systems around them.">
 <meta property="og:image" content="https://khanahmadharis.github.io/Pharma-Pipeline-Map/og-image.png?v=2">
 <meta property="og:url" content="https://khanahmadharis.github.io/Pharma-Pipeline-Map/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pharma Pipeline Map">
+<meta name="twitter:title" content="How drugs are made?">
 <meta name="twitter:description" content="An interactive map of how a drug goes from idea to market: stages, functions, GxP, modality, dosage form and the systems around them.">
 <meta name="twitter:image" content="https://khanahmadharis.github.io/Pharma-Pipeline-Map/og-image.png?v=2">
 <meta name="description" content="Interactive practitioner reference: how a drug goes from idea to market, organised by modality, dosage form and stage, with functions, GxP, systems and glossary.">
@@ -508,7 +508,7 @@ code{background:var(--surface-2)}
   <div class="top-in">
     <button class="brand" id="brandHome" title="Back to the map">
       <div class="logo">Rx</div>
-      <div><h1>Pharma Pipeline Map</h1><small>Idea to market: modality, dosage form, stage, functions, GxP</small></div>
+      <div><h1>How drugs are made?</h1><small>Idea to market: modality, dosage form, stage, functions, GxP</small></div>
     </button>
     <button class="btn back" id="backBtn">&larr; Back to map</button>
     <div class="search" id="searchWrap">
@@ -537,11 +537,11 @@ code{background:var(--surface-2)}
     </div>
   </div>
   <section class="home-sec first"><h2>The map</h2><p class="sub">Six stages from target to market. Hover or tab to a stage for a summary, click or press Enter to open its page.</p>
-  <div class="graph-wrap"><canvas id="graph" aria-hidden="true"></canvas><ol class="graph-a11y" id="graphA11y" aria-label="Pipeline map. Use Tab or the arrow keys to move between stages and Enter to open one."></ol>
+  <div class="graph-wrap"><canvas id="graph" aria-hidden="true"></canvas><ol class="graph-a11y" id="graphA11y" aria-label="Map of the stages. Use Tab or the arrow keys to move between stages and Enter to open one."></ol>
     <div class="graph-legend"><span>Six stages, in order. Each opens its own page.</span><button class="btn" id="graphReset" style="padding:5px 12px;font-size:12.5px">Reset</button></div>
   </div>
   </section>
-  <section class="home-sec"><h2>Follow a molecule</h2><p class="sub">Pick a modality and press Play. The molecule walks the pipeline while the card explains each step.</p>
+  <section class="home-sec"><h2>Follow a molecule</h2><p class="sub">Pick a modality and press Play. The molecule walks the stages while the card explains each step.</p>
   <div class="story" id="story">
     <div class="story-bar">
       <span class="lbl">Follow a molecule:</span>
@@ -554,16 +554,16 @@ code{background:var(--surface-2)}
     <div class="story-card" id="storyCard" aria-live="polite"></div>
   </div>
   </section>
-  <section class="home-sec wide"><h2>All eight stages</h2><p class="sub">The same pipeline with Clinical split into its three phases. Hover for a summary, click to open.</p>
+  <section class="home-sec wide"><h2>All eight stages</h2><p class="sub">The same path with Clinical split into its three phases. Hover for a summary, click to open.</p>
   <div class="card" style="padding:10px 18px 18px"><div class="map"><div class="map-in" id="stair"></div></div></div>
   </section>
   <section class="home-sec wide" id="software"><h2>The software along the path</h2><p class="sub">Which systems run each stage. A darker square means the category is more central there. Hover a square for a summary, click a row for the products and where the evidence comes from.</p>
   <div class="sw-key" id="swKey"></div>
-  <div class="sw-grid-wrap"><table class="sw-grid" id="swGrid" aria-label="Software categories by pipeline stage"></table></div>
+  <div class="sw-grid-wrap"><table class="sw-grid" id="swGrid" aria-label="Software categories by stage"></table></div>
   <div class="sw-panel" id="swPanel" hidden></div>
   </section>
 
-  <section class="home-sec"><h2>Browse by section</h2><p class="sub">Everything around the pipeline: the three axes, the functions, the rules and the systems.</p>
+  <section class="home-sec"><h2>Browse by section</h2><p class="sub">Everything around the path: the three axes, the functions, the rules and the systems.</p>
     <div class="tiles" id="hubTiles"></div>
   </section>
   <div class="foot"><p>Practitioner reference, not regulatory advice. US framing uses FDA terminology; EU framing uses EMA and EudraLex terminology. Durations, costs and attrition are indicative and drawn from commonly cited public estimates; check current guidance and your own programme data before relying on any figure. Last revised September 2026.</p></div>
@@ -572,7 +572,7 @@ code{background:var(--surface-2)}
 <!-- ============ SEARCH ============ -->
 <section class="view" id="view-search"><div class="view-h"><div class="blob" style="background:var(--navy)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><div><h2>Search results</h2><p id="searchSub"></p></div></div><div id="searchBody"></div></section>
 
-<section class="view" id="view-clinical" data-title="Clinical development" data-sub="Phases 1 to 3: from first-in-human to confirmatory trials. About 5 to 8 years in total, and the part of the pipeline where most programmes fail." data-color="var(--peri)" data-icon="users"><div id="clinicalBody"></div></section>
+<section class="view" id="view-clinical" data-title="Clinical development" data-sub="Phases 1 to 3: from first-in-human to confirmatory trials. About 5 to 8 years in total, and the part of development where most programmes fail." data-color="var(--peri)" data-icon="users"><div id="clinicalBody"></div></section>
 
 <!-- ============ STAGE VIEWS (generated) ============ -->
 <div id="stageViews"></div>
@@ -1510,7 +1510,7 @@ const RISK = {
  disc:'The target turns out not to matter in human disease; hits are potent but unselective or poorly absorbed; a candidate is picked for potency and cannot be made or formulated at scale.',
  pre:'Unexpected toxicity in the second species; exposure margins too thin to allow a useful clinical dose; the first GMP batch misses specification or is unstable; a clinical hold for gaps in the CMC section.',
  p1:'Poor pharmacokinetics (short half-life, low oral bioavailability); dose-limiting toxicity below the predicted efficacious exposure; immunogenicity for biologics; a first-in-human formulation that cannot be scaled.',
- p2:'Lack of efficacy is the single biggest killer in the pipeline; the wrong dose, endpoint or patient population; process changes that create comparability questions just as the pivotal design is being fixed.',
+ p2:'Lack of efficacy is the single biggest killer in development; the wrong dose, endpoint or patient population; process changes that create comparability questions just as the pivotal design is being fixed.',
  p3:'An effect size smaller than Phase 2 suggested; safety signals that only appear at scale; process validation or registration stability lagging the clinical readout; data quality issues at sites or CROs.',
  sub:'A Complete Response Letter for CMC deficiencies or inspection findings; data integrity observations in QC labs; a narrower label than planned; paediatric obligations not in order.',
  app:'Supply shortfalls and cold-chain excursions; slow national pricing and reimbursement decisions in Europe; for cell therapies, treatment-centre onboarding and manufacturing slots limiting uptake.',
@@ -2206,7 +2206,7 @@ function renderMatrix(){
   }));
 }
 function renderExamples(){
-  $('#examplesBody').innerHTML = EXAMPLES.map((e,i)=>col(e.name, `<div class="example"><div class="ax">${e.axes.map(a=>`<b>${esc(a[0])}</b><span>${a[1]}</span>`).join('')}</div><h3 class="k4" style="margin-top:10px">How it runs through the pipeline</h3><p>${e.story}</p><h3 class="k4">Analytical and systems view</h3><p style="margin:0">${e.lanes}</p></div>`, {color:e.color, id:'ex-'+i})).join('');
+  $('#examplesBody').innerHTML = EXAMPLES.map((e,i)=>col(e.name, `<div class="example"><div class="ax">${e.axes.map(a=>`<b>${esc(a[0])}</b><span>${a[1]}</span>`).join('')}</div><h3 class="k4" style="margin-top:10px">How it runs from idea to market</h3><p>${e.story}</p><h3 class="k4">Analytical and systems view</h3><p style="margin:0">${e.lanes}</p></div>`, {color:e.color, id:'ex-'+i})).join('');
 }
 function renderOrg(){
   const shape = `<div class="card"><h3>A typical top-level shape</h3><p class="muted" style="font-size:14px">Most integrated companies resolve to something like this, with different labels.</p><div class="grid g3">
