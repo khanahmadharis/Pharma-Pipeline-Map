@@ -485,6 +485,21 @@ code{background:var(--surface-2)}
 .sw-grid thead th,.sw-grid thead th.rowh{font-size:13px;font-weight:700}
 .sw-grid th.rowh{font-size:15px}
 
+/* phone header: two compact rows that scroll away with the page instead of staying pinned */
+@media (max-width:620px){
+  .top{position:static}
+  .top-in{padding-top:8px;padding-bottom:8px;gap:6px 8px}
+  .brand{gap:8px}
+  .brand .logo{width:28px;height:28px}
+  .search{order:4;flex:1 1 120px;max-width:none}
+  .search input{height:36px;font-size:13px;padding-left:30px}
+  .search svg{left:9px}
+  .btn-group{order:5;gap:4px}
+  .top .btn{padding:7px 8px;font-size:12.5px;box-shadow:2px 2px 0 var(--ink)}
+  .hits{order:6;flex-basis:100%}
+  .hits:empty{display:none}
+  .opt>.col-h{position:static}
+}
 </style>
 </head>
 <body>
