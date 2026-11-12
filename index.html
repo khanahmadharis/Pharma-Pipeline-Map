@@ -1952,6 +1952,7 @@ window.initSwMap = function(api){
     if(s){ const r = panel.getBoundingClientRect(); if(r.bottom>innerHeight||r.top<80) panel.scrollIntoView({behavior:'smooth', block:'nearest'}); }
   }
   renderKey(); renderGrid();
+  window.swSelect = select;
 };
 
 </script>
@@ -2520,12 +2521,17 @@ function applySearch(){
     if(vid==='matrix') $$('.mx .c', v).forEach(c=>{ const cell=MX[+c.dataset.r][+c.dataset.c]; const t=MX_ROWS[+c.dataset.r]+' by '+MX_COLS[+c.dataset.c]+': '+cell[1]; if(t.toLowerCase().includes(q)) results.push({view:vid, where:'Matrix', title:MX_ROWS[+c.dataset.r]+' by '+MX_COLS[+c.dataset.c], snip:snip(t), el:c}); });
     if(vid==='lanes') $$('.lanes .cell', v).forEach(c=>{ const l=LANES[+c.dataset.l], cell=l.cells[+c.dataset.c]; const t=l.name+' during '+LANE_STAGES[+c.dataset.c]+': '+cell[1]+'. '+cell[2]; if(t.toLowerCase().includes(q)) results.push({view:vid, where:'Swimlanes', title:l.name+' during '+LANE_STAGES[+c.dataset.c], snip:snip(t), el:c}); });
   });
+  SOFTWARE.forEach(c=>{
+    const ct = c.name+': '+c.what; if(ct.toLowerCase().includes(q)) results.push({sw:c.key, where:'Software', title:c.name, snip:snip(ct)});
+    c.products.forEach(p=>{ const pt = p.n+' ('+p.vendor+'): '+p.note; if(pt.toLowerCase().includes(q)) results.push({sw:c.key, where:'Software: '+c.name, title:p.n, snip:snip(pt)}); });
+  });
   const out = results;
   $('#hits').textContent = out.length ? `${out.length} match${out.length===1?'':'es'}` : 'No matches';
   $('#searchSub').textContent = out.length ? `"${input.value.trim()}" appears in ${out.length} place${out.length===1?'':'s'}. Click a result to jump there.` : `Nothing matched "${input.value.trim()}".`;
   $('#searchBody').innerHTML = out.map((r,i)=>`<div class="res" data-i="${i}"><span class="where">${esc(r.where)}</span><b>${mark(r.title)}</b><span class="snip">${r.snip}</span></div>`).join('');
   $$('#searchBody .res').forEach(d=>d.addEventListener('click',()=>{
     const r = out[+d.dataset.i];
+    if(r.sw){ navigate('home', null); setTimeout(()=>{ if(window.swSelect) window.swSelect({cat:r.sw}); const g = document.getElementById('swPanel'); if(g) g.scrollIntoView({behavior:'auto', block:'center'}); }, 420); return; }
     const target = viewEl(r.view);
     // open the path of collapsibles
     let el = r.el; const chain=[]; while(el && el!==target){ if(el.classList.contains('col')) chain.push(el); el = el.parentElement; }
